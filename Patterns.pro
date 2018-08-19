@@ -5,9 +5,11 @@ CONFIG -= qt
 
 SOURCES += \
     main.cpp \
-    patterntester.cpp
+    patterntester.cpp \
+    Strategy/duck.cpp
 
 HEADERS += \
+    patterntester.h \
     Strategy/duck.h \
     Observer/weatherdata.h \
-    patterntester.h
+    Strategy/behaviors.h

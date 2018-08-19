@@ -1,6 +1,10 @@
 #include "patterntester.h"
+#include "Strategy/duck.h"
+#include "Strategy/behaviors.h"
 #include <iostream>
 #include <iomanip>
+#include <vector>
+#include <memory>
 
 void PatternTester::testPattern(Pattern pattern)
 {
@@ -22,12 +26,31 @@ void PatternTester::testPattern(Pattern pattern)
 
 void PatternTester::testStrategy()
 {
+    std::vector<std::shared_ptr<Duck>> ducks;
 
+    const auto mallarDuck = std::make_shared<MallardDuck>();
+    const auto modelDuck = std::make_shared<ModelDuck>();
+    const auto redheadDuck = std::make_shared<RedheadDuck>();
+    const auto decoyDuck = std::make_shared<DecoyDuck>();
+    decoyDuck->setFlyBehavior(std::make_shared<FlyRocketPowered>());
+
+    ducks.push_back(mallarDuck);
+    ducks.push_back(modelDuck);
+    ducks.push_back(redheadDuck);
+    ducks.push_back(decoyDuck);
+
+    for (const auto &duck : ducks)
+    {
+        duck->display();
+        duck->swim();
+        duck->performFly();
+        duck->performQuack();
+        std::cout << std::endl;
+    }
 }
 
 void PatternTester::testObserver()
 {
-
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)
