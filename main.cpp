@@ -4,6 +4,7 @@
 int main()
 {
     PatternTester::testPattern(Pattern::Strategy);
+    PatternTester::testPattern(Pattern::Observer);
 
     std::cout << std::endl;
     std::cout << "All tests were finished.";

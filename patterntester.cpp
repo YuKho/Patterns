@@ -1,6 +1,8 @@
 #include "patterntester.h"
 #include "Strategy/duck.h"
 #include "Strategy/behaviors.h"
+#include "Observer/weatherstation.h"
+#include "Observer/weatherobservers.h"
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -51,6 +53,15 @@ void PatternTester::testStrategy()
 
 void PatternTester::testObserver()
 {
+    const auto station = std::make_shared<WeatherStation>();
+
+    const auto display = std::make_shared<CurrentConditionsDisplay>(station);
+    station->registerObserver(display);
+
+    station->setMeasurements(80.f, 65.f, 30.4f);
+    station->setMeasurements(82.f, 70.f, 29.2f);
+    station->setMeasurements(78.f, 90.f, 29.2f);
+    station->setMeasurements(78.2f, 90.f, 29.2f); // <-- probably will not be notified
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)

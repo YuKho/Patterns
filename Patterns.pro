@@ -1,15 +1,18 @@
 TEMPLATE = app
-CONFIG += console c++17
+CONFIG += console c++14
 CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
     main.cpp \
     patterntester.cpp \
-    Strategy/duck.cpp
+    Strategy/duck.cpp \
+    Observer/weatherstation.cpp \
+    Observer/weatherobservers.cpp
 
 HEADERS += \
     patterntester.h \
     Strategy/duck.h \
-    Observer/weatherdata.h \
-    Strategy/behaviors.h
+    Strategy/behaviors.h \
+    Observer/weatherstation.h \
+    Observer/weatherobservers.h
