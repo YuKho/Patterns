@@ -5,3 +5,4 @@ This project was created to show the simple demonstration of basic code patterns
 ## Represented code patterns 
 
 * Strategy
+* Observer
