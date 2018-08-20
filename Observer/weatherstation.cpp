@@ -30,7 +30,7 @@ void WeatherStation::removeObserver(const std::shared_ptr<WeatherObserver> &obse
 void WeatherStation::notifyObservers()
 {
     for (const auto &observer : _observers)
-        observer->update(shared_from_this(), _data);
+        observer->update(_data);
 }
 
 void WeatherStation::setMeasurements(float temp, float hum, float press)

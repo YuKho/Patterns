@@ -2,56 +2,96 @@
 #include "weatherstation.h"
 #include <iostream>
 #include <tuple>
+#include <cmath>
 
-CurrentConditionsDisplay::CurrentConditionsDisplay(std::weak_ptr<Observable> observable)
+BaseObserver::BaseObserver(std::weak_ptr<Observable> observable)
     : _weatherStation(std::move(observable))
 {
 }
 
-void CurrentConditionsDisplay::registerObservable(std::weak_ptr<Observable> observable)
+void BaseObserver::registerObservable(std::weak_ptr<Observable> observable)
 {
     if (!_weatherStation.expired())
-        _weatherStation.lock()->removeObserver(shared_from_this());
+        _weatherStation.lock()->removeObserver(make_shared_from_this());
 
     _weatherStation = std::move(observable);
-    if (!_weatherStation.expired())
-        _weatherStation.lock()->registerObserver(shared_from_this());
+    registerObservable();
 }
 
-void CurrentConditionsDisplay::registerObservable()
+void BaseObserver::registerObservable()
 {
     if (!_weatherStation.expired())
-        _weatherStation.lock()->registerObserver(shared_from_this());
+        _weatherStation.lock()->registerObserver(make_shared_from_this());
 }
 
-
-void CurrentConditionsDisplay::update(std::shared_ptr<Observable> observable,
-                                      const WeatherData &data)
+void CurrentConditionsDisplay::update(const WeatherData &data)
 {
-    if (observable == _weatherStation.lock())
-    {
-        std::tie(_temperature, _humidity, _pressure) =
-                std::tie(data.temperature, data.humidity, data.pressure);
-        display();
-    }
-    else
-    {
-        std::cerr << "Wrong observable object." << std::endl;
-    }
+    std::tie(_temperature, _humidity, _pressure) = std::tie(data.temperature, data.humidity,
+                                                            data.pressure);
+    display();
 }
 
 void CurrentConditionsDisplay::display()
 {
-    std::cout << "CurrentConditionsDisplay:\n";
-    std::cout << "Temp:     " << _temperature << "\n";
-    std::cout << "Humidity: " << _humidity << "\n";
-    std::cout << "Pressure: " << _pressure << "\n";
+    std::cout << "Current conditions display:\n";
+    std::cout << "\tTemp:     " << _temperature << "\n";
+    std::cout << "\tHumidity: " << _humidity << "\n";
+    std::cout << "\tPressure: " << _pressure << "\n";
 }
 
-std::shared_ptr<CurrentConditionsDisplay> CurrentConditionsDisplay::create(
-        std::weak_ptr<Observable> observable)
+std::shared_ptr<WeatherObserver> CurrentConditionsDisplay::make_shared_from_this()
 {
-    auto observer = std::make_shared<CurrentConditionsDisplay>(observable);
-    observer->registerObservable();
-    return observer;
+    return shared_from_this();
+}
+
+void StatisticsDisplay::update(const WeatherData &data)
+{
+    tempSum += data.temperature;
+    ++numReadings;
+
+    if (data.temperature > maxTemp)
+        maxTemp = data.temperature;
+
+    if (data.temperature < minTemp)
+        minTemp = data.temperature;
+
+    display();
+}
+
+void StatisticsDisplay::display()
+{
+    std::cout << "Statistics display:\n";
+    std::cout << "\tAvg/Max/Min temperature = " << (tempSum / numReadings)
+              << "/" << maxTemp << "/" << minTemp << "\n";
+}
+
+std::shared_ptr<WeatherObserver> StatisticsDisplay::make_shared_from_this()
+{
+    return shared_from_this();
+}
+
+void ForecastDisplay::update(const WeatherData &data)
+{
+    lastPressure = currentPressure;
+    currentPressure = data.pressure;
+
+    display();
+}
+
+void ForecastDisplay::display()
+{
+    std::cout << "Forecast display: \n";
+    if (currentPressure > lastPressure)
+        std::cout << "\tImproving weather on the way!\n";
+
+    else if ((currentPressure - lastPressure) < std::fabs(0.01f))
+        std::cout << "\tMore of the same\n";
+
+    else if (currentPressure < lastPressure)
+        std::cout << "\tWatch out for cooler, rainy weather\n";
+}
+
+std::shared_ptr<WeatherObserver> ForecastDisplay::make_shared_from_this()
+{
+    return shared_from_this();
 }

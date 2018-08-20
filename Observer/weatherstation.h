@@ -20,7 +20,7 @@ struct WeatherData
     float temperature, humidity, pressure;
 };
 
-class WeatherStation : public Observable, public std::enable_shared_from_this<WeatherStation>
+class WeatherStation : public Observable
 {
 public:
     void registerObserver(std::shared_ptr<WeatherObserver> observer) override;
