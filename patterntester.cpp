@@ -54,9 +54,7 @@ void PatternTester::testStrategy()
 void PatternTester::testObserver()
 {
     const auto station = std::make_shared<WeatherStation>();
-
-    const auto display = std::make_shared<CurrentConditionsDisplay>(station);
-    station->registerObserver(display);
+    const auto display = CurrentConditionsDisplay::create(station);
 
     station->setMeasurements(80.f, 65.f, 30.4f);
     station->setMeasurements(82.f, 70.f, 29.2f);

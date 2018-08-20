@@ -22,7 +22,7 @@ void WeatherStation::registerObserver(std::shared_ptr<WeatherObserver> observer)
 
 void WeatherStation::removeObserver(const std::shared_ptr<WeatherObserver> &observer)
 {
-    auto it = std::find(_observers.cbegin(), _observers.cend(), observer);
+    const auto it = std::find(_observers.cbegin(), _observers.cend(), observer);
     if (it != _observers.cend())
         _observers.erase(it);
 }
