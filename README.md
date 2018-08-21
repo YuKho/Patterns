@@ -6,3 +6,4 @@ This project was created to show the simple demonstration of basic code patterns
 
 * Strategy
 * Observer
+* Decorator
