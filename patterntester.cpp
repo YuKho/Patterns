@@ -3,6 +3,7 @@
 #include "Strategy/behaviors.h"
 #include "Observer/weatherstation.h"
 #include "Observer/weatherobservers.h"
+#include "Decorator/beverage.h"
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -20,6 +21,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::Observer:
         testObserver();
+        break;
+
+    case Pattern::Decorator:
+        testDecorator();
         break;
     }
 
@@ -64,6 +69,24 @@ void PatternTester::testObserver()
     station->setMeasurements(78.2f, 90.f, 29.2f); // <-- probably will not be notified
 }
 
+void PatternTester::testDecorator()
+{
+    auto espresso = std::make_shared<Espresso>();
+    std::cout << espresso.get() << std::endl;
+
+    auto darkRoast = std::make_shared<DarkRoast>();
+    auto darkRoastMocha = std::make_shared<Mocha>(std::move(darkRoast));
+    auto darkRoastMochaMocha = std::make_shared<Mocha>(std::move(darkRoastMocha));
+    auto darkRoastMochaMochaWhip = std::make_shared<Whip>(std::move(darkRoastMochaMocha));
+    std::cout << darkRoastMochaMochaWhip.get() << std::endl;
+
+    auto houseBlend = std::make_shared<HouseBlend>();
+    auto houseBlendSoy = std::make_shared<Soy>(std::move(houseBlend));
+    auto houseBlendSoyMocha = std::make_shared<Mocha>(std::move(houseBlendSoy));
+    auto houseBlendSoyMochaWhip = std::make_shared<Whip>(std::move(houseBlendSoyMocha));
+    std::cout << houseBlendSoyMochaWhip.get() << std::endl;
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -102,5 +125,10 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Observer:
         return "Observer";
+
+    case Pattern::Decorator:
+        return "Decorator";
     }
+
+    return "No name";
 }

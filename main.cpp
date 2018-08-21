@@ -5,6 +5,7 @@ int main()
 {
     PatternTester::testPattern(Pattern::Strategy);
     PatternTester::testPattern(Pattern::Observer);
+    PatternTester::testPattern(Pattern::Decorator);
 
     std::cout << std::endl;
     std::cout << "All tests were finished.";

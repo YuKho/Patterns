@@ -8,11 +8,13 @@ SOURCES += \
     patterntester.cpp \
     Strategy/duck.cpp \
     Observer/weatherstation.cpp \
-    Observer/weatherobservers.cpp
+    Observer/weatherobservers.cpp \
+    Decorator/beverage.cpp
 
 HEADERS += \
     patterntester.h \
     Strategy/duck.h \
     Strategy/behaviors.h \
     Observer/weatherstation.h \
-    Observer/weatherobservers.h
+    Observer/weatherobservers.h \
+    Decorator/beverage.h
