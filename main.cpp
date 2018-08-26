@@ -3,9 +3,10 @@
 
 int main()
 {
-    PatternTester::testPattern(Pattern::Strategy);
-    PatternTester::testPattern(Pattern::Observer);
-    PatternTester::testPattern(Pattern::Decorator);
+//    PatternTester::testPattern(Pattern::Strategy);
+//    PatternTester::testPattern(Pattern::Observer);
+//    PatternTester::testPattern(Pattern::Decorator);
+    PatternTester::testPattern(Pattern::Factory);
 
     std::cout << std::endl;
     std::cout << "All tests were finished.";
