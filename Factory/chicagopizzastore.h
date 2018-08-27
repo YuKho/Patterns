@@ -2,6 +2,7 @@
 #define CHICAGOPIZZASTORE_H
 
 #include "pizzastore.h"
+#include "chicagopizzas.h"
 #include <memory>
 
 class ChicagoPizzaStore : public PizzaStore

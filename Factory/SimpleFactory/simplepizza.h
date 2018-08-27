@@ -3,49 +3,38 @@
 
 #include "../pizza.h"
 
-class CheesePizza : public Pizza
+class SimplePizzaPizza : public Pizza
 {
+protected:
+    using Pizza::Pizza;
+
 public:
-    CheesePizza() : Pizza("Cheese Pizza", "Regular Crust", "Marinara Pizza Sauce")
-    {
-        addTopping("Fresh Mozzarella");
-        addTopping("Parmesan");
-    }
+    void cut() const override;
 };
 
-class PepperoniPizza : public Pizza
+class CheesePizza : public SimplePizzaPizza
 {
 public:
-    PepperoniPizza() : Pizza("Pepperoni Pizza", "Crust", "Marinara Sauce")
-    {
-        addTopping("Sliced Pepperoni");
-        addTopping("Sliced Onion");
-        addTopping("Grated parmesan cheese");
-    }
+    CheesePizza();
 };
 
-class ClamPizza : public Pizza
+class PepperoniPizza : public SimplePizzaPizza
 {
 public:
-    ClamPizza() : Pizza("Clam Pizza", "Thin Crust", "White Garlic Sauce")
-    {
-        addTopping("Clams");
-        addTopping("Grated parmesan cheese");
-    }
+    PepperoniPizza();
 };
 
-class VeggiePizza : public Pizza
+class ClamPizza : public SimplePizzaPizza
 {
 public:
-    VeggiePizza() : Pizza("Veggie Pizza", "Crust", "Marinara Sauce")
-    {
-        addTopping("Shredded mozzarella");
-        addTopping("Grated parmesan");
-        addTopping("Diced onion");
-        addTopping("Sliced mushrooms");
-        addTopping("Sliced red pepper");
-        addTopping("Sliced black olives");
-    }
+    ClamPizza();
+};
+
+class VeggiePizza : public SimplePizzaPizza
+{
+public:
+    VeggiePizza();
+    void cut() const override;
 };
 
 #endif // SIMPLEPIZZA_H

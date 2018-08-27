@@ -5,8 +5,8 @@
 #include "Observer/weatherobservers.h"
 #include "Decorator/beverage.h"
 #include "Factory/SimpleFactory/simplepizzastore.h"
-#include "Factory/SimpleFactory/simplepizzafactory.h"
 #include "Factory/chicagopizzastore.h"
+#include "Factory/nypizzastore.h"
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -97,19 +97,26 @@ void PatternTester::testDecorator()
 void PatternTester::testFactory()
 {
     std::cout << "\n-------------------------Simple Factory--------------------------" << std::endl;
-    const std::unique_ptr<Pizza> pizzaCheese = SimplePizzaStore::orderPizza("cheese");
-    std::cout << "Pizza prepared.\n" << std::endl;
-    std::cout << "We ordered a " << pizzaCheese.get() << std::endl << std::endl;
+    std::vector<std::unique_ptr<Pizza>> pizzas;
+    pizzas.push_back(SimplePizzaStore::orderPizza("cheese"));
+    pizzas.push_back(SimplePizzaStore::orderPizza("veggie"));
+    std::cout << "\nWe ordered: \n\n";
+    for (const auto &pizza : pizzas)
+        std::cout << pizza.get() << std::endl;
 
-    const std::unique_ptr<Pizza> pizzaVegie = SimplePizzaStore::orderPizza("veggie");
-    std::cout << "Pizza prepared.\n" << std::endl;
-    std::cout << "We ordered a " << pizzaVegie.get();
     std::cout << "------------------------Simple Factory end-----------------------" << std::endl;
 
-    std::cout << "\n-------------------------Abstact Factory--------------------------" << std::endl;
-    const std::unique_ptr<PizzaStore> chicagoStore = std::make_unique<ChicagoPizzaStore>();
-    chicagoStore->orderPizza("cheese");
-    std::cout << "\n----------------------Abstact Factory end-------------------------" << std::endl;
+    std::cout << "\n-------------------------Factory Method--------------------------" << std::endl;
+    std::vector<std::unique_ptr<PizzaStore>> pizzaStores;
+    pizzaStores.push_back(std::make_unique<ChicagoPizzaStore>());
+    pizzaStores.push_back(std::make_unique<NYPizzaStore>());
+
+    for (const auto &store : pizzaStores)
+    {
+        store->orderPizza("cheese"); std::cout << std::endl;
+        store->orderPizza("veggie"); std::cout << std::endl;
+    }
+    std::cout << "\n-----------------------Factory Method end------------------------" << std::endl;
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)

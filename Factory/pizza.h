@@ -8,10 +8,8 @@
 class Pizza
 {
 public:
-    Pizza(std::string name, std::string dough, std::string sauce);
-    virtual ~Pizza() = 0;
-
-    virtual void cut() const;
+    virtual ~Pizza() = default;
+    virtual void cut() const = 0;
 
     void prepare() const;
     void bake() const;
@@ -20,6 +18,7 @@ public:
     std::ostream &print(std::ostream &os) const;
 
 protected:
+    Pizza(std::string name, std::string dough, std::string sauce);
     void addTopping(std::string top);
 
 private:
@@ -27,40 +26,6 @@ private:
     std::string _dough;
     std::string _sauce;
     std::vector<std::string> _toppings;
-};
-
-class NYStyleCheesePizza : public Pizza
-{
-public:
-    NYStyleCheesePizza();
-};
-
-class ChicagoStyleCheesePizza : public Pizza
-{
-public:
-    ChicagoStyleCheesePizza();
-    void cut() const override;
-};
-
-class ChicagoStylePepperoniPizza : public Pizza
-{
-public:
-    ChicagoStylePepperoniPizza();
-    void cut() const override;
-};
-
-class ChicagoStyleClamPizza : public Pizza
-{
-public:
-    ChicagoStyleClamPizza();
-    void cut() const override;
-};
-
-class ChicagoStyleVeggiePizza : public Pizza
-{
-public:
-    ChicagoStyleVeggiePizza();
-    void cut() const override;
 };
 
 std::ostream &operator << (std::ostream &os, Pizza *pizza);
