@@ -1,4 +1,4 @@
-# Patterns
+# Head First Design Patterns (2014)
 
 This project was created to show the simple demonstration of basic code patterns design on C++. This is the console project based on qmake.
 
