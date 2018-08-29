@@ -35,4 +35,5 @@ HEADERS += \
     Factory/nypizzastore.h \
     Factory/pizzaingredientfactory.h \
     Factory/nypizzaingredientfactory.h \
-    Factory/pizzas.h
+    Factory/pizzas.h \
+    Factory/ingredients.h
