@@ -2,32 +2,49 @@
 #define NYPIZZASTORE_H
 
 #include "pizzastore.h"
-#include "nypizzas.h"
+#include "pizzas.h"
+#include "nypizzaingredientfactory.h"
 #include <memory>
 
 class NYPizzaStore : public PizzaStore
 {
+public:
+    NYPizzaStore() : _factory{std::make_shared<NYPizzaIngredientFactory>()} {}
+
 private:
     std::unique_ptr<Pizza> createPizza(const std::string &name) const override
     {
+        std::unique_ptr<Pizza> pizza;
+
         switch (getPizzaType(name))
         {
         case PizzaType::Cheese:
-            return std::make_unique<NYStyleCheesePizza>();
+            pizza = std::make_unique<CheesePizza>(_factory);
+            pizza->setName("");
+            return pizza;
 
         case PizzaType::Pepperoni:
-            return std::make_unique<NYStylePepperoniPizza>();
+            pizza = std::make_unique<PepperoniPizza>(_factory);
+            pizza->setName("");
+            return pizza;
 
         case PizzaType::Clam:
-            return std::make_unique<NYStyleClamPizza>();
+            pizza = std::make_unique<ClamPizza>(_factory);
+            pizza->setName("");
+            return pizza;
 
         case PizzaType::Veggie:
-            return std::make_unique<NYStyleVeggiePizza>();
+            pizza = std::make_unique<VeggiePizza>(_factory);
+            pizza->setName("");
+            return pizza;
 
         default:
             return nullptr;
         }
     }
+
+private:
+    std::shared_ptr<PizzaIngredientFactory> _factory;
 };
 
 #endif // NYPIZZASTORE_H

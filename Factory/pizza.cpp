@@ -7,14 +7,9 @@ Pizza::Pizza(std::string name, std::string dough, std::string sauce)
 {
 }
 
-void Pizza::prepare() const
+Pizza::Pizza(std::weak_ptr<PizzaIngredientFactory> factory)
+    : _ingredientFactory(std::move(factory))
 {
-    std::cout << "Preparing \'" << _name << "\'...\n";
-    std::cout << "Adding toppings:\n";
-    for (const auto &top : _toppings)
-        std::cout << "  " << top << "\n";
-
-    std::cout << "Preparing \'" << _name << "\' finished." << std::endl;
 }
 
 void Pizza::bake() const
@@ -30,6 +25,11 @@ void Pizza::box() const
 std::string Pizza::getName() const
 {
     return _name;
+}
+
+void Pizza::setName(std::string name)
+{
+    _name = std::move(name);
 }
 
 std::ostream &Pizza::print(std::ostream &os) const

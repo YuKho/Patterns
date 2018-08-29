@@ -16,7 +16,6 @@ class PizzaIngredientFactory
 public:
     virtual ~PizzaIngredientFactory() = default;
 
-protected:
     virtual std::unique_ptr<Dough> createDought() const = 0;
     virtual std::unique_ptr<Sauce> createSauce() const = 0;
     virtual std::unique_ptr<Cheese> createCheese() const = 0;
