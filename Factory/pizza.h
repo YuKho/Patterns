@@ -10,10 +10,10 @@ class Pizza
 public:
     virtual ~Pizza() = default;
     virtual void cut() const = 0;
+    virtual void prepare() const;
+    virtual void bake() const;
+    virtual void box() const;
 
-    void prepare() const;
-    void bake() const;
-    void box() const;
     std::string getName() const;
     std::ostream &print(std::ostream &os) const;
 
