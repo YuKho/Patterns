@@ -1,4 +1,5 @@
 #include "pizza.h"
+#include "ingredients.h"
 #include <iostream>
 #include <utility>
 
@@ -35,11 +36,11 @@ void Pizza::setName(std::string name)
 std::ostream &Pizza::print(std::ostream &os) const
 {
     os << "---- " << _name << " ----\n";
-    if (_dough)     os << _dough.get() << "\n";
-    if (_sauce)     os << _sauce.get() << "\n";
-    if (_cheese)    os << _cheese.get() << "\n";
-    if (_clam)      os << _clam.get() << "\n";
-    if (_pepperoni) os << _pepperoni.get() << "\n";
+    if (_dough)     os << _dough->name() << "\n";
+    if (_sauce)     os << _sauce->name() << "\n";
+    if (_cheese)    os << _cheese->name() << "\n";
+    if (_clam)      os << _clam->name() << "\n";
+    if (_pepperoni) os << _pepperoni->name() << "\n";
 
     for (const auto &veggie : _veggies)
         if (veggie) os << veggie.get() << "\n";

@@ -32,12 +32,11 @@ public:
 protected:
     Pizza(std::string name, std::weak_ptr<PizzaIngredientFactory> factory);
 
-    virtual void prepare() const = 0;
+    virtual void prepare() = 0;
 
 protected:
     std::weak_ptr<PizzaIngredientFactory> _ingredientFactory;
 
-private:
     std::string _name;
     std::shared_ptr<Dough> _dough;
     std::shared_ptr<Sauce> _sauce;

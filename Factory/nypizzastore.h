@@ -14,29 +14,19 @@ public:
 private:
     std::unique_ptr<Pizza> createPizza(const std::string &name) const override
     {
-        std::unique_ptr<Pizza> pizza;
-
         switch (getPizzaType(name))
         {
         case PizzaType::Cheese:
-            pizza = std::make_unique<CheesePizza>(_factory);
-            pizza->setName("");
-            return pizza;
+            return std::make_unique<CheesePizza>("New York Style Cheese Pizza", _factory);
 
         case PizzaType::Pepperoni:
-            pizza = std::make_unique<PepperoniPizza>(_factory);
-            pizza->setName("");
-            return pizza;
+            return std::make_unique<PepperoniPizza>("New York Style Pepperoni Pizza", _factory);
 
         case PizzaType::Clam:
-            pizza = std::make_unique<ClamPizza>(_factory);
-            pizza->setName("");
-            return pizza;
+            return std::make_unique<ClamPizza>("New York Style Clam Pizza", _factory);
 
         case PizzaType::Veggie:
-            pizza = std::make_unique<VeggiePizza>(_factory);
-            pizza->setName("");
-            return pizza;
+            return std::make_unique<VeggiePizza>("New York Style Veggie Pizza", _factory);
 
         default:
             return nullptr;

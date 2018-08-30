@@ -12,8 +12,7 @@ public:
     using Pizza::Pizza;
 
 private:
-    void prepare() const override;
-
+    void prepare() override;
 };
 
 class PepperoniPizza : public Pizza
@@ -22,7 +21,7 @@ public:
     using Pizza::Pizza;
 
 private:
-    void prepare() const override;
+    void prepare() override;
 };
 
 class ClamPizza : public Pizza
@@ -31,7 +30,7 @@ public:
     using Pizza::Pizza;
 
 private:
-    void prepare() const override;
+    void prepare() override;
 };
 
 class VeggiePizza : public Pizza
@@ -40,7 +39,7 @@ public:
     using Pizza::Pizza;
 
 private:
-    void prepare() const override;
+    void prepare() override;
 };
 
 #endif // PIZZAS_H
