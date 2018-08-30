@@ -8,7 +8,7 @@ class Dough;
 class Sauce;
 class Cheese;
 class Pepperoni;
-class Clam;
+class Clams;
 class Veggies;
 
 class PizzaIngredientFactory
@@ -20,7 +20,7 @@ public:
     virtual std::unique_ptr<Sauce> createSauce() const = 0;
     virtual std::unique_ptr<Cheese> createCheese() const = 0;
     virtual std::unique_ptr<Pepperoni> createPepperoni() const = 0;
-    virtual std::unique_ptr<Clam> createClam() const = 0;
+    virtual std::unique_ptr<Clams> createClam() const = 0;
     virtual std::vector<std::unique_ptr<Veggies>> createVeggies() const = 0;
 };
 
