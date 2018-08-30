@@ -3,15 +3,18 @@
 
 #include <string>
 #include <utility>
+#include <cassert>
 
 // Abstract ingredients
 
 class Ingredient
 {
 public:
-    explicit Ingredient(std::string name) : _ingredient(std::move(name)) {}
     virtual ~Ingredient() = default;
-    std::string name() const { return _ingredient; }
+    std::string name() const { assert(!_ingredient.empty()); return _ingredient; }
+
+protected:
+    explicit Ingredient(std::string name) : _ingredient(std::move(name)) {}
 
 private:
     std::string _ingredient;
@@ -19,37 +22,37 @@ private:
 
 class Dough : public Ingredient
 {
-public:
+protected:
     using Ingredient::Ingredient;
 };
 
 class Sauce : public Ingredient
 {
-public:
+protected:
     using Ingredient::Ingredient;
 };
 
 class Cheese : public Ingredient
 {
-public:
+protected:
     using Ingredient::Ingredient;
 };
 
 class Clams : public Ingredient
 {
-public:
+protected:
     using Ingredient::Ingredient;
 };
 
 class Veggies : public Ingredient
 {
-public:
+protected:
     using Ingredient::Ingredient;
 };
 
 class Pepperoni : public Ingredient
 {
-public:
+protected:
     using Ingredient::Ingredient;
 };
 
@@ -58,97 +61,97 @@ public:
 class ThickCrustDough : public Dough
 {
 public:
-    using Dough::Dough;
+    ThickCrustDough() : Dough("ThickCrust Dough") {}
 };
 
 class ThinCrustDough : public Dough
 {
 public:
-    using Dough::Dough;
+    ThinCrustDough() : Dough("ThinCrust Dough") {}
 };
 
 class PlumTomatoSauce : public Sauce
 {
 public:
-    using Sauce::Sauce;
+    PlumTomatoSauce() : Sauce("PlumTomato Sauce") {}
 };
 
 class MarinaraSauce : public Sauce
 {
 public:
-    using Sauce::Sauce;
+    MarinaraSauce() : Sauce("Marinara Sauce") {}
 };
 
 class MozzarellaCheese : public Cheese
 {
 public:
-    using Cheese::Cheese;
+    MozzarellaCheese() : Cheese("Mozzarella Cheese") {}
 };
 
 class ReggianoCheese : public Cheese
 {
 public:
-    using Cheese::Cheese;
+    ReggianoCheese() : Cheese("Reggiano Cheese") {}
 };
 
 class FrozenClams : public Clams
 {
 public:
-    using Clams::Clams;
+    FrozenClams() : Clams("Frozen Clams") {}
 };
 
 class FreshClams : public Clams
 {
 public:
-    using Clams::Clams;
+    FreshClams() : Clams("Fresh Clams") {}
 };
 
 class Garlic : public Veggies
 {
 public:
-    using Veggies::Veggies;
+    Garlic() : Veggies("Garlic") {}
 };
 
 class Onion : public Veggies
 {
 public:
-    using Veggies::Veggies;
+    Onion() : Veggies("Onion") {}
 };
 
 class Mushroom : public Veggies
 {
 public:
-    using Veggies::Veggies;
+    Mushroom() : Veggies("Mushroom") {}
 };
 
 class RedPepper : public Veggies
 {
 public:
-    using Veggies::Veggies;
+    RedPepper() : Veggies("Red Pepper") {}
 };
 
 class BlackOlives : public Veggies
 {
 public:
-    using Veggies::Veggies;
+    BlackOlives() : Veggies("Black Olives") {}
 };
 
 class Spinach : public Veggies
 {
 public:
-    using Veggies::Veggies;
+    Spinach() : Veggies("Spinach") {}
 };
 
 class Eggplant : public Veggies
 {
 public:
-    using Veggies::Veggies;
+    Eggplant() : Veggies("Eggplant") {}
 };
 
 class SlicedPepperoni : public Pepperoni
 {
 public:
-    using Pepperoni::Pepperoni;
+    SlicedPepperoni() : Pepperoni("Sliced Pepperoni") {}
 };
 
 #endif // INGREDIENTS_H
