@@ -2,14 +2,14 @@
 #include <iostream>
 #include <utility>
 
-Pizza::Pizza(std::string name, std::string dough, std::string sauce)
-    : _name(std::move(name)), _dough(std::move(dough)), _sauce(std::move(sauce))
+Pizza::Pizza(std::string name, std::weak_ptr<PizzaIngredientFactory> factory)
+    : _ingredientFactory(std::move(factory)), _name(std::move(name))
 {
 }
 
-Pizza::Pizza(std::weak_ptr<PizzaIngredientFactory> factory)
-    : _ingredientFactory(std::move(factory))
+void Pizza::cut() const
 {
+    std::cout << "Cutting the \'" << _name << "\' into diagonal slices" << std::endl;
 }
 
 void Pizza::bake() const
@@ -34,19 +34,17 @@ void Pizza::setName(std::string name)
 
 std::ostream &Pizza::print(std::ostream &os) const
 {
-    os << "---- " << _name << " ----\n"
-       << _dough << "\n"
-       << _sauce << "\n";
+    os << "---- " << _name << " ----\n";
+    if (_dough)     os << _dough.get() << "\n";
+    if (_sauce)     os << _sauce.get() << "\n";
+    if (_cheese)    os << _cheese.get() << "\n";
+    if (_clam)      os << _clam.get() << "\n";
+    if (_pepperoni) os << _pepperoni.get() << "\n";
 
-    for (const auto &top : _toppings)
-        os << top << "\n";
+    for (const auto &veggie : _veggies)
+        if (veggie) os << veggie.get() << "\n";
 
     return os;
-}
-
-void Pizza::addTopping(std::string top)
-{
-    _toppings.push_back(std::move(top));
 }
 
 std::ostream &operator <<(std::ostream &os, Pizza *pizza)

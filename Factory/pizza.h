@@ -6,25 +6,32 @@
 #include <iosfwd>
 #include <memory>
 
+class Dough;
+class Sauce;
+class Cheese;
+class Pepperoni;
+class Clams;
+class Veggies;
+
 class PizzaIngredientFactory;
 
 class Pizza
 {
 public:
     virtual ~Pizza() = default;
-    virtual void cut() const = 0;
 
+    void cut() const;
     void bake() const;
     void box() const;
+
     std::string getName() const;
     void setName(std::string name);
+
     std::ostream &print(std::ostream &os) const;
 
 protected:
-    Pizza() = default;
-    Pizza(std::string name, std::string dough, std::string sauce);
-    Pizza(std::weak_ptr<PizzaIngredientFactory> factory);
-    void addTopping(std::string top);
+    Pizza(std::string name, std::weak_ptr<PizzaIngredientFactory> factory);
+
     virtual void prepare() const = 0;
 
 protected:
@@ -32,9 +39,12 @@ protected:
 
 private:
     std::string _name;
-    std::string _dough;
-    std::string _sauce;
-    std::vector<std::string> _toppings;
+    std::shared_ptr<Dough> _dough;
+    std::shared_ptr<Sauce> _sauce;
+    std::shared_ptr<Cheese> _cheese;
+    std::shared_ptr<Pepperoni> _pepperoni;
+    std::shared_ptr<Clams> _clam;
+    std::vector<std::shared_ptr<Veggies>> _veggies;
 };
 
 std::ostream &operator << (std::ostream &os, Pizza *pizza);
