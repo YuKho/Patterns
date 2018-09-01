@@ -16,7 +16,7 @@ void PepperoniPizza::prepare()
     _dough = _ingredientFactory.lock()->createDought();
     _sauce = _ingredientFactory.lock()->createSauce();
     _cheese = _ingredientFactory.lock()->createCheese();
-    _veggies = _ingredientFactory.lock()->createVeggies();
+    createVeggies();
     _pepperoni = _ingredientFactory.lock()->createPepperoni();
 }
 
@@ -35,5 +35,5 @@ void VeggiePizza::prepare()
     _dough = _ingredientFactory.lock()->createDought();
     _sauce = _ingredientFactory.lock()->createSauce();
     _cheese = _ingredientFactory.lock()->createCheese();
-    _veggies = _ingredientFactory.lock()->createVeggies();
+    createVeggies();
 }

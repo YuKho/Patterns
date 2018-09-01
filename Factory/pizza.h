@@ -24,6 +24,8 @@ public:
     void bake() const;
     void box() const;
 
+    virtual void prepare() = 0;
+
     std::string getName() const;
     void setName(std::string name);
 
@@ -31,8 +33,7 @@ public:
 
 protected:
     Pizza(std::string name, std::weak_ptr<PizzaIngredientFactory> factory);
-
-    virtual void prepare() = 0;
+    void createVeggies();
 
 protected:
     std::weak_ptr<PizzaIngredientFactory> _ingredientFactory;

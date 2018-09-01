@@ -1,11 +1,21 @@
 #include "pizza.h"
 #include "ingredients.h"
+#include "pizzaingredientfactory.h"
 #include <iostream>
 #include <utility>
+#include <algorithm>
+#include <iterator>
 
 Pizza::Pizza(std::string name, std::weak_ptr<PizzaIngredientFactory> factory)
     : _ingredientFactory(std::move(factory)), _name(std::move(name))
 {
+}
+
+void Pizza::createVeggies()
+{
+    auto veggies = _ingredientFactory.lock()->createVeggies();
+    std::move(std::begin(veggies), std::end(veggies),
+              std::back_inserter(_veggies));
 }
 
 void Pizza::cut() const
