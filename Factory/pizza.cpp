@@ -10,6 +10,9 @@ Pizza::Pizza(std::string name, std::weak_ptr<PizzaIngredientFactory> factory)
 
 void Pizza::prepare()
 {
+    if (_ingredientFactory.expired())
+        return;
+
     std::cout << "Preparing " << name();
     prepareImpl();
 }

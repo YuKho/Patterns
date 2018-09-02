@@ -7,7 +7,6 @@
 class AbstractPizza
 {
 public:
-    explicit AbstractPizza(std::string name);
     virtual ~AbstractPizza() = default;
 
     std::string name() const;
@@ -17,8 +16,10 @@ public:
 
     virtual void cut() const;
     virtual void prepare() = 0;
-
     virtual std::ostream& print(std::ostream &os) const = 0;
+
+protected:
+    explicit AbstractPizza(std::string name);
 
 private:
     std::string _name;

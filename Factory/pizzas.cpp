@@ -3,32 +3,36 @@
 
 void CheesePizza::prepareImpl()
 {
-    _dough = _ingredientFactory.lock()->createDought();
-    _sauce = _ingredientFactory.lock()->createSauce();
-    _cheese = _ingredientFactory.lock()->createCheese();
+    const auto factory = _ingredientFactory.lock();
+    _dough = factory->createDought();
+    _sauce = factory->createSauce();
+    _cheese = factory->createCheese();
 }
 
 void PepperoniPizza::prepareImpl()
 {
-    _dough = _ingredientFactory.lock()->createDought();
-    _sauce = _ingredientFactory.lock()->createSauce();
-    _cheese = _ingredientFactory.lock()->createCheese();
-    _veggies = _ingredientFactory.lock()->createVeggies();
-    _pepperoni = _ingredientFactory.lock()->createPepperoni();
+    const auto factory = _ingredientFactory.lock();
+    _dough = factory->createDought();
+    _sauce = factory->createSauce();
+    _cheese = factory->createCheese();
+    _veggies = factory->createVeggies();
+    _pepperoni = factory->createPepperoni();
 }
 
 void ClamPizza::prepareImpl()
 {
-    _dough = _ingredientFactory.lock()->createDought();
-    _sauce = _ingredientFactory.lock()->createSauce();
-    _cheese = _ingredientFactory.lock()->createCheese();
-    _clam = _ingredientFactory.lock()->createClam();
+    const auto factory = _ingredientFactory.lock();
+    _dough = factory->createDought();
+    _sauce = factory->createSauce();
+    _cheese = factory->createCheese();
+    _clam = factory->createClam();
 }
 
 void VeggiePizza::prepareImpl()
 {
-    _dough = _ingredientFactory.lock()->createDought();
-    _sauce = _ingredientFactory.lock()->createSauce();
-    _cheese = _ingredientFactory.lock()->createCheese();
-    _veggies = _ingredientFactory.lock()->createVeggies();
+    const auto factory = _ingredientFactory.lock();
+    _dough = factory->createDought();
+    _sauce = factory->createSauce();
+    _cheese = factory->createCheese();
+    _veggies = factory->createVeggies();
 }
