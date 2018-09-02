@@ -1,27 +1,22 @@
 #ifndef SIMPLEPIZZA_H
 #define SIMPLEPIZZA_H
 
+#include "../abstractpizza.h"
 #include <string>
 #include <vector>
 #include <iosfwd>
 
-class SimplePizza
+class SimplePizza : public AbstractPizza
 {
 public:
-    virtual ~SimplePizza() = default;
-    virtual void cut() const;
-    virtual void prepare() const;
-    virtual void bake() const;
-    virtual void box() const;
-
-    std::ostream &print(std::ostream &os) const;
+    void prepare() const override;
+    std::ostream& print(std::ostream &os) const override;
 
 protected:
     SimplePizza(std::string name, std::string dough, std::string sauce);
     void addTopping(std::string top);
 
 protected:
-    std::string _name;
     std::string _dough;
     std::string _sauce;
     std::vector<std::string> _toppings;
@@ -51,7 +46,5 @@ public:
     SimpleVeggiePizza();
     void cut() const override;
 };
-
-std::ostream &operator << (std::ostream &os, SimplePizza *pizza);
 
 #endif // SIMPLEPIZZA_H

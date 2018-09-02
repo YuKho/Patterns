@@ -2,40 +2,38 @@
 #include <iostream>
 #include <utility>
 
-void SimplePizza::cut() const
-{
-    std::cout << "Cut the \'" << _name << "\' into diagonal slices" << std::endl;
-}
-
 void SimplePizza::prepare() const
 {
+    std::cout << "Preparing " << name() << "\n";
+    std::cout << "Tossing dough...,\t";
+    std::cout << "Adding sauce...";
 
-}
-
-void SimplePizza::bake() const
-{
-
-}
-
-void SimplePizza::box() const
-{
-
+    if (!_toppings.empty())
+    {
+        std::cout << "Adding toppings: \n";
+        for (const auto &topping : _toppings)
+            std::cout << "\t" << topping;
+    }
 }
 
 std::ostream &SimplePizza::print(std::ostream &os) const
 {
-    os << "---- " << _name << " ----\n"
+    os << "---- " << name() << " ----\n"
        << _dough << "\n"
        << _sauce << "\n";
 
-    for (const auto &top : _toppings)
-        os << top << "\n";
+    if (!_toppings.empty())
+    {
+        os << "Toppings:\n";
+        for (const auto &topping : _toppings)
+            os << "\t" << topping << "\n";
+    }
 
     return os;
 }
 
 SimplePizza::SimplePizza(std::string name, std::string dough, std::string sauce)
-    : _name(std::move(name)), _dough(std::move(dough)), _sauce(std::move(sauce))
+    : AbstractPizza(std::move(name)), _dough(std::move(dough)), _sauce(std::move(sauce))
 {
 }
 
@@ -75,10 +73,5 @@ SimpleVeggiePizza::SimpleVeggiePizza() : SimplePizza("Veggie Pizza", "Crust", "M
 
 void SimpleVeggiePizza::cut() const
 {
-    std::cout << "Cut the \'" << _name << "\' into triangle form" << std::endl;
-}
-
-std::ostream &operator <<(std::ostream &os, SimplePizza *pizza)
-{
-    return pizza->print(os);
+    std::cout << "Cut the \'" << name() << "\' into triangle form" << std::endl;
 }
