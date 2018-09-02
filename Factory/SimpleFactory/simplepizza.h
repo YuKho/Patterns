@@ -1,40 +1,57 @@
 #ifndef SIMPLEPIZZA_H
 #define SIMPLEPIZZA_H
 
-#include "../pizza.h"
+#include <string>
+#include <vector>
+#include <iosfwd>
 
-class SimplePizzaPizza : public Pizza
+class SimplePizza
 {
+public:
+    virtual ~SimplePizza() = default;
+    virtual void cut() const;
+    virtual void prepare() const;
+    virtual void bake() const;
+    virtual void box() const;
+
+    std::ostream &print(std::ostream &os) const;
+
 protected:
-    using Pizza::Pizza;
+    SimplePizza(std::string name, std::string dough, std::string sauce);
+    void addTopping(std::string top);
 
+protected:
+    std::string _name;
+    std::string _dough;
+    std::string _sauce;
+    std::vector<std::string> _toppings;
+};
+
+class SimpleCheesePizza : public SimplePizza
+{
 public:
+    SimpleCheesePizza();
+};
+
+class SimplePepperoniPizza : public SimplePizza
+{
+public:
+    SimplePepperoniPizza();
+};
+
+class SimpleClamPizza : public SimplePizza
+{
+public:
+    SimpleClamPizza();
+};
+
+class SimpleVeggiePizza : public SimplePizza
+{
+public:
+    SimpleVeggiePizza();
     void cut() const override;
 };
 
-class CheesePizza : public SimplePizzaPizza
-{
-public:
-    CheesePizza();
-};
-
-class PepperoniPizza : public SimplePizzaPizza
-{
-public:
-    PepperoniPizza();
-};
-
-class ClamPizza : public SimplePizzaPizza
-{
-public:
-    ClamPizza();
-};
-
-class VeggiePizza : public SimplePizzaPizza
-{
-public:
-    VeggiePizza();
-    void cut() const override;
-};
+std::ostream &operator << (std::ostream &os, SimplePizza *pizza);
 
 #endif // SIMPLEPIZZA_H

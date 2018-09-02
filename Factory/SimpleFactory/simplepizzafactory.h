@@ -10,21 +10,21 @@ class SimplePizzaFactory
 public:
     enum class PizzaType { Cheese, Pepperoni, Clam, Veggie, Invalid };
 
-    static std::unique_ptr<Pizza> createPizza(const std::string &name)
+    static std::unique_ptr<SimplePizza> createPizza(const std::string &name)
     {
         switch (getPizzaType(name))
         {
         case PizzaType::Cheese:
-            return std::make_unique<CheesePizza>();
+            return std::make_unique<SimpleCheesePizza>();
 
         case PizzaType::Pepperoni:
-            return std::make_unique<PepperoniPizza>();
+            return std::make_unique<SimplePepperoniPizza>();
 
         case PizzaType::Clam:
-            return std::make_unique<ClamPizza>();
+            return std::make_unique<SimpleClamPizza>();
 
         case PizzaType::Veggie:
-            return std::make_unique<VeggiePizza>();
+            return std::make_unique<SimpleVeggiePizza>();
 
         default:
             return nullptr;
