@@ -1,12 +1,17 @@
 #include "patterntester.h"
+
 #include "Strategy/duck.h"
 #include "Strategy/behaviors.h"
+
 #include "Observer/weatherstation.h"
 #include "Observer/weatherobservers.h"
+
 #include "Decorator/beverage.h"
+
 #include "Factory/SimpleFactory/simplepizzastore.h"
 #include "Factory/chicagopizzastore.h"
 #include "Factory/nypizzastore.h"
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -96,27 +101,45 @@ void PatternTester::testDecorator()
 
 void PatternTester::testFactory()
 {
-    std::cout << "\n-------------------------Simple Factory--------------------------" << std::endl;
-    std::vector<std::unique_ptr<Pizza>> pizzas;
+    std::cout << decorateMessage("Simple Factory", '-') << std::endl;
+    std::vector<std::unique_ptr<SimplePizza>> pizzas;
     pizzas.push_back(SimplePizzaStore::orderPizza("cheese"));
     pizzas.push_back(SimplePizzaStore::orderPizza("veggie"));
     std::cout << "\nWe ordered: \n\n";
     for (const auto &pizza : pizzas)
         std::cout << pizza.get() << std::endl;
+    std::cout << decorateMessage("Simple Factory end", '-') << std::endl << std::endl;
 
-    std::cout << "------------------------Simple Factory end-----------------------" << std::endl;
+    std::cout << decorateMessage("Abstract Factory", '-') << std::endl;
+    auto nyStore = std::make_shared<NYPizzaStore>();
+    auto chicagoStore = std::make_shared<ChicagoPizzaStore>();
 
-    std::cout << "\n-------------------------Factory Method--------------------------" << std::endl;
-    std::vector<std::unique_ptr<PizzaStore>> pizzaStores;
-    pizzaStores.push_back(std::make_unique<ChicagoPizzaStore>());
-    pizzaStores.push_back(std::make_unique<NYPizzaStore>());
+    std::shared_ptr<Pizza> pizza = nyStore->orderPizza("cheese");
+    std::cout << "Ethan ordered a \'" + pizza->getName() + "\'\n\n";
 
-    for (const auto &store : pizzaStores)
-    {
-        store->orderPizza("cheese"); std::cout << std::endl;
-        store->orderPizza("veggie"); std::cout << std::endl;
-    }
-    std::cout << "\n-----------------------Factory Method end------------------------" << std::endl;
+    pizza = chicagoStore->orderPizza("cheese");
+    std::cout << "Joel ordered a \'" + pizza->getName() + "\'\n\n";
+
+    pizza = nyStore->orderPizza("clam");
+    std::cout << "Ethan ordered a \'" + pizza->getName() + "\'\n\n";
+
+    pizza = chicagoStore->orderPizza("clam");
+    std::cout << "Joel ordered a \'" + pizza->getName() + "\'\n\n";
+
+    pizza = nyStore->orderPizza("pepperoni");
+    std::cout << "Ethan ordered a \'" + pizza->getName() + "\'\n\n";
+
+    pizza = chicagoStore->orderPizza("pepperoni");
+    std::cout << "Joel ordered a \'" + pizza->getName() + "\'\n\n";
+
+    pizza = nyStore->orderPizza("veggie");
+    std::cout << "Ethan ordered a \'" + pizza->getName() + "\'\n";
+    std::cout << pizza.get() << "\n";
+
+    pizza = chicagoStore->orderPizza("veggie");
+    std::cout << "Joel ordered a \'" + pizza->getName() + "\'\n";
+    std::cout << pizza.get() << std::endl;
+    std::cout << decorateMessage("Abstract Factory end", '-') << std::endl << std::endl;
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)
@@ -131,19 +154,19 @@ void PatternTester::prinPostInfo(Pattern pattern)
     std::cout << decorateMessage(message) << std::endl << std::endl;
 }
 
-std::string PatternTester::decorateMessage(std::string message)
+std::string PatternTester::decorateMessage(std::string message, char decorChar)
 {
     message.insert(0, " ");
     message.push_back(' ');
     const size_t maxLength = 100;
     const size_t messageLength = message.size();
     const size_t decorSideLength = maxLength > messageLength ? (maxLength - messageLength) / 2 : 0;
-    const std::string decorStr(decorSideLength, '#');
+    const std::string decorStr(decorSideLength, decorChar);
     message.insert(0, decorStr);
     message += decorStr;
 
     if (message.size() < maxLength)
-        message.push_back('#');
+        message.push_back(decorChar);
 
     return message;
 }
