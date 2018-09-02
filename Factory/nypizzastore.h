@@ -9,7 +9,7 @@
 class NYPizzaStore : public PizzaStore
 {
 public:
-    NYPizzaStore() : _factory{std::make_shared<NYPizzaIngredientFactory>()} {}
+    NYPizzaStore() : PizzaStore{std::make_shared<NYPizzaIngredientFactory>()} {}
 
 private:
     std::unique_ptr<Pizza> createPizza(const std::string &name) const override
@@ -32,9 +32,6 @@ private:
             return nullptr;
         }
     }
-
-private:
-    std::shared_ptr<PizzaIngredientFactory> _factory;
 };
 
 #endif // NYPIZZASTORE_H
