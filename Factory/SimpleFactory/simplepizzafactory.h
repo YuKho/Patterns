@@ -1,52 +1,32 @@
 #ifndef SIMPLEPIZZAFACTORY_H
 #define SIMPLEPIZZAFACTORY_H
 
+#include "../pizzastore.h"
 #include "simplepizza.h"
 #include <memory>
-#include <string>
 
 class SimplePizzaFactory
 {
 public:
-    enum class PizzaType { Cheese, Pepperoni, Clam, Veggie, Invalid };
-
     static std::unique_ptr<SimplePizza> createPizza(const std::string &name)
     {
-        switch (getPizzaType(name))
+        switch (PizzaStore::getPizzaType(name))
         {
-        case PizzaType::Cheese:
+        case PizzaStore::PizzaType::Cheese:
             return std::make_unique<SimpleCheesePizza>();
 
-        case PizzaType::Pepperoni:
+        case PizzaStore::PizzaType::Pepperoni:
             return std::make_unique<SimplePepperoniPizza>();
 
-        case PizzaType::Clam:
+        case PizzaStore::PizzaType::Clam:
             return std::make_unique<SimpleClamPizza>();
 
-        case PizzaType::Veggie:
+        case PizzaStore::PizzaType::Veggie:
             return std::make_unique<SimpleVeggiePizza>();
 
         default:
             return nullptr;
         }
-    }
-
-private:
-    static PizzaType getPizzaType(const std::string &name)
-    {
-        if (name == "cheese")
-            return PizzaType::Cheese;
-
-        if (name == "pepperoni")
-            return PizzaType::Pepperoni;
-
-        if (name == "clam")
-            return PizzaType::Clam;
-
-        if (name == "veggie")
-            return PizzaType::Veggie;
-
-        return PizzaType::Invalid;
     }
 };
 
