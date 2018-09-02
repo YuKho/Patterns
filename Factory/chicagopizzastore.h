@@ -12,6 +12,7 @@ public:
     ChicagoPizzaStore() : PizzaStore{std::make_shared<ChicagoPizzaIngredientFactory>()} {}
 
 private:
+    // This method represent also 'Factory method' pattern.
     std::unique_ptr<Pizza> createPizza(const std::string &name) const override
     {
         switch (getPizzaType(name))

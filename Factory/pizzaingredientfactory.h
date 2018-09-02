@@ -11,6 +11,7 @@ class Pepperoni;
 class Clams;
 class Veggies;
 
+// This class represent 'Abstract factory' pattern.
 class PizzaIngredientFactory
 {
 public:
