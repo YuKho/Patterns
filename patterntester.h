@@ -18,7 +18,7 @@ private:
 
     static void prinPreInfo(Pattern pattern);
     static void prinPostInfo(Pattern pattern);
-    static std::string decorateMessage(std::string message);
+    static std::string decorateMessage(std::string message, char decorChar = '#');
     static std::string patternName(Pattern pattern);
 };
 

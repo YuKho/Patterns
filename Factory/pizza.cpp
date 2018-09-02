@@ -1,20 +1,33 @@
 #include "pizza.h"
+#include "ingredients.h"
+#include "pizzaingredientfactory.h"
 #include <iostream>
 #include <utility>
+#include <algorithm>
+#include <iterator>
+#include <cassert>
 
-Pizza::Pizza(std::string name, std::string dough, std::string sauce)
-    : _name(std::move(name)), _dough(std::move(dough)), _sauce(std::move(sauce))
+Pizza::Pizza(std::string name, std::weak_ptr<PizzaIngredientFactory> factory)
+    : _ingredientFactory(std::move(factory)), _name(std::move(name))
 {
+    assert(_ingredientFactory.lock());
 }
 
-void Pizza::prepare() const
+void Pizza::createVeggies()
 {
-    std::cout << "Preparing \'" << _name << "\'...\n";
-    std::cout << "Adding toppings:\n";
-    for (const auto &top : _toppings)
-        std::cout << "  " << top << "\n";
+    auto veggies = _ingredientFactory.lock()->createVeggies();
+    std::move(std::begin(veggies), std::end(veggies),
+              std::back_inserter(_veggies));
+}
 
-    std::cout << "Preparing \'" << _name << "\' finished." << std::endl;
+void Pizza::addTopping(std::string top)
+{
+    _toppings.push_back(std::move(top));
+}
+
+void Pizza::cut() const
+{
+    std::cout << "Cutting the \'" << _name << "\' into diagonal slices" << std::endl;
 }
 
 void Pizza::bake() const
@@ -32,21 +45,31 @@ std::string Pizza::getName() const
     return _name;
 }
 
-std::ostream &Pizza::print(std::ostream &os) const
+void Pizza::setName(std::string name)
 {
-    os << "---- " << _name << " ----\n"
-       << _dough << "\n"
-       << _sauce << "\n";
-
-    for (const auto &top : _toppings)
-        os << top << "\n";
-
-    return os;
+    _name = std::move(name);
 }
 
-void Pizza::addTopping(std::string top)
+std::ostream &Pizza::print(std::ostream &os) const
 {
-    _toppings.push_back(std::move(top));
+    os << "---- " << _name << " ----\n";
+    if (_dough)     os << _dough->name() << "\n";
+    if (_sauce)     os << _sauce->name() << "\n";
+    if (_cheese)    os << _cheese->name() << "\n";
+    if (_clam)      os << _clam->name() << "\n";
+    if (_pepperoni) os << _pepperoni->name() << "\n";
+
+    if (!_veggies.empty())
+        os << "Veggies:\n";
+    for (const auto &veggie : _veggies)
+        if (veggie) os << "\t" << veggie->name() << "\n";
+
+    if (!_toppings.empty())
+        os << "Toppings:\n";
+    for (const auto &top : _toppings)
+        os << "\t" << top << "\n";
+
+    return os;
 }
 
 std::ostream &operator <<(std::ostream &os, Pizza *pizza)
