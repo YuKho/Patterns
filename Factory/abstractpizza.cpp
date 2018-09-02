@@ -30,3 +30,8 @@ std::ostream &operator <<(std::ostream &os, const AbstractPizza &pizza)
 {
     return pizza.print(os);
 }
+
+std::ostream &operator <<(std::ostream &os, AbstractPizza *pizza)
+{
+    return pizza->print(os);
+}

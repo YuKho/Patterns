@@ -26,5 +26,6 @@ private:
 };
 
 std::ostream &operator << (std::ostream &os, const AbstractPizza &pizza);
+std::ostream &operator << (std::ostream &os, AbstractPizza *pizza);
 
 #endif // ABSTRACTPIZZA_H
