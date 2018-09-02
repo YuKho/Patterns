@@ -2,7 +2,7 @@
 #include <iostream>
 #include <utility>
 
-void SimplePizza::prepare() const
+void SimplePizza::prepare()
 {
     std::cout << "Preparing " << name() << "\n";
     std::cout << "Tossing dough...,\t";

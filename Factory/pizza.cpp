@@ -1,58 +1,22 @@
 #include "pizza.h"
-#include "ingredients.h"
 #include "pizzaingredientfactory.h"
 #include <iostream>
 #include <utility>
-#include <algorithm>
-#include <iterator>
-#include <cassert>
 
 Pizza::Pizza(std::string name, std::weak_ptr<PizzaIngredientFactory> factory)
-    : _ingredientFactory(std::move(factory)), _name(std::move(name))
+    : AbstractPizza(std::move(name)), _ingredientFactory(std::move(factory))
 {
-    assert(_ingredientFactory.lock());
 }
 
-void Pizza::createVeggies()
+void Pizza::prepare()
 {
-    auto veggies = _ingredientFactory.lock()->createVeggies();
-    std::move(std::begin(veggies), std::end(veggies),
-              std::back_inserter(_veggies));
-}
-
-void Pizza::addTopping(std::string top)
-{
-    _toppings.push_back(std::move(top));
-}
-
-void Pizza::cut() const
-{
-    std::cout << "Cutting the \'" << _name << "\' into diagonal slices" << std::endl;
-}
-
-void Pizza::bake() const
-{
-    std::cout << "Bake for 25 minutes at 350." << std::endl;
-}
-
-void Pizza::box() const
-{
-    std::cout << "Place \'" << _name << "\' in official PizzaStore box." << std::endl;
-}
-
-std::string Pizza::getName() const
-{
-    return _name;
-}
-
-void Pizza::setName(std::string name)
-{
-    _name = std::move(name);
+    std::cout << "Preparing " << name();
+    prepareImpl();
 }
 
 std::ostream &Pizza::print(std::ostream &os) const
 {
-    os << "---- " << _name << " ----\n";
+    os << "---- " << name() << " ----\n";
     if (_dough)     os << _dough->name() << "\n";
     if (_sauce)     os << _sauce->name() << "\n";
     if (_cheese)    os << _cheese->name() << "\n";
@@ -64,15 +28,5 @@ std::ostream &Pizza::print(std::ostream &os) const
     for (const auto &veggie : _veggies)
         if (veggie) os << "\t" << veggie->name() << "\n";
 
-    if (!_toppings.empty())
-        os << "Toppings:\n";
-    for (const auto &top : _toppings)
-        os << "\t" << top << "\n";
-
     return os;
-}
-
-std::ostream &operator <<(std::ostream &os, Pizza *pizza)
-{
-    return pizza->print(os);
 }

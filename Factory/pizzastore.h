@@ -18,7 +18,7 @@ public:
     {
         auto pizza = createPizza(name);
 
-        std::cout << "--- Making a " + pizza->getName() + " ---" << std::endl;
+        std::cout << "--- Making a " + pizza->name() + " ---" << std::endl;
         pizza->prepare();
         pizza->bake();
         pizza->cut();

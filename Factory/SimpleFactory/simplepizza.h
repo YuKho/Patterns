@@ -4,12 +4,11 @@
 #include "../abstractpizza.h"
 #include <string>
 #include <vector>
-#include <iosfwd>
 
 class SimplePizza : public AbstractPizza
 {
 public:
-    void prepare() const override;
+    void prepare() override;
     std::ostream& print(std::ostream &os) const override;
 
 protected:

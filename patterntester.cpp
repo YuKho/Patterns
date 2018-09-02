@@ -115,29 +115,29 @@ void PatternTester::testFactory()
     auto chicagoStore = std::make_shared<ChicagoPizzaStore>();
 
     std::shared_ptr<Pizza> pizza = nyStore->orderPizza("cheese");
-    std::cout << "Ethan ordered a \'" + pizza->getName() + "\'\n\n";
+    std::cout << "Ethan ordered a \'" + pizza->name() + "\'\n\n";
 
     pizza = chicagoStore->orderPizza("cheese");
-    std::cout << "Joel ordered a \'" + pizza->getName() + "\'\n\n";
+    std::cout << "Joel ordered a \'" + pizza->name() + "\'\n\n";
 
     pizza = nyStore->orderPizza("clam");
-    std::cout << "Ethan ordered a \'" + pizza->getName() + "\'\n\n";
+    std::cout << "Ethan ordered a \'" + pizza->name() + "\'\n\n";
 
     pizza = chicagoStore->orderPizza("clam");
-    std::cout << "Joel ordered a \'" + pizza->getName() + "\'\n\n";
+    std::cout << "Joel ordered a \'" + pizza->name() + "\'\n\n";
 
     pizza = nyStore->orderPizza("pepperoni");
-    std::cout << "Ethan ordered a \'" + pizza->getName() + "\'\n\n";
+    std::cout << "Ethan ordered a \'" + pizza->name() + "\'\n\n";
 
     pizza = chicagoStore->orderPizza("pepperoni");
-    std::cout << "Joel ordered a \'" + pizza->getName() + "\'\n\n";
+    std::cout << "Joel ordered a \'" + pizza->name() + "\'\n\n";
 
     pizza = nyStore->orderPizza("veggie");
-    std::cout << "Ethan ordered a \'" + pizza->getName() + "\'\n";
+    std::cout << "Ethan ordered a \'" + pizza->name() + "\'\n";
     std::cout << pizza.get() << "\n";
 
     pizza = chicagoStore->orderPizza("veggie");
-    std::cout << "Joel ordered a \'" + pizza->getName() + "\'\n";
+    std::cout << "Joel ordered a \'" + pizza->name() + "\'\n";
     std::cout << pizza.get() << std::endl;
     std::cout << decorateMessage("Abstract Factory end", '-') << std::endl << std::endl;
 }

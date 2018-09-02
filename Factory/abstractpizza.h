@@ -16,7 +16,7 @@ public:
     void box() const;
 
     virtual void cut() const;
-    virtual void prepare() const = 0;
+    virtual void prepare() = 0;
 
     virtual std::ostream& print(std::ostream &os) const = 0;
 
