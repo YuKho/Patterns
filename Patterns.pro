@@ -15,7 +15,8 @@ SOURCES += \
     Factory/nypizzaingredientfactory.cpp \
     Factory/pizzas.cpp \
     Factory/chicagopizzaingredientfactory.cpp \
-    Factory/abstractpizza.cpp
+    Factory/abstractpizza.cpp \
+    Factory/pizzastore.cpp
 
 HEADERS += \
     patterntester.h \
