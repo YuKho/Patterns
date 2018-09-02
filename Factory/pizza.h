@@ -1,6 +1,7 @@
 #ifndef PIZZA_H
 #define PIZZA_H
 
+#include "ingredients.h"
 #include <string>
 #include <vector>
 #include <iosfwd>
@@ -20,10 +21,10 @@ class Pizza
 public:
     virtual ~Pizza() = default;
 
-    void cut() const;
     void bake() const;
     void box() const;
 
+    virtual void cut() const;
     virtual void prepare() = 0;
 
     std::string getName() const;
@@ -31,9 +32,11 @@ public:
 
     std::ostream &print(std::ostream &os) const;
 
-protected:
     Pizza(std::string name, std::weak_ptr<PizzaIngredientFactory> factory);
+
+protected:
     void createVeggies();
+    void addTopping(std::string top);
 
 protected:
     std::weak_ptr<PizzaIngredientFactory> _ingredientFactory;
@@ -45,6 +48,9 @@ protected:
     std::shared_ptr<Pepperoni> _pepperoni;
     std::shared_ptr<Clams> _clam;
     std::vector<std::shared_ptr<Veggies>> _veggies;
+
+private:
+    std::vector<std::string> _toppings;
 };
 
 std::ostream &operator << (std::ostream &os, Pizza *pizza);

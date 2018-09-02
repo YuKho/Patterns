@@ -11,9 +11,7 @@ SOURCES += \
     Observer/weatherobservers.cpp \
     Decorator/beverage.cpp \
     Factory/pizza.cpp \
-    Factory/chicagopizzas.cpp \
     Factory/SimpleFactory/simplepizza.cpp \
-    Factory/nypizzas.cpp \
     Factory/nypizzaingredientfactory.cpp \
     Factory/pizzas.cpp \
     Factory/chicagopizzaingredientfactory.cpp
@@ -31,8 +29,6 @@ HEADERS += \
     Factory/SimpleFactory/simplepizzastore.h \
     Factory/pizzastore.h \
     Factory/chicagopizzastore.h \
-    Factory/nypizzas.h \
-    Factory/chicagopizzas.h \
     Factory/nypizzastore.h \
     Factory/pizzaingredientfactory.h \
     Factory/nypizzaingredientfactory.h \

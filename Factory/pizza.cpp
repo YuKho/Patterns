@@ -5,10 +5,12 @@
 #include <utility>
 #include <algorithm>
 #include <iterator>
+#include <cassert>
 
 Pizza::Pizza(std::string name, std::weak_ptr<PizzaIngredientFactory> factory)
     : _ingredientFactory(std::move(factory)), _name(std::move(name))
 {
+    assert(_ingredientFactory.lock());
 }
 
 void Pizza::createVeggies()
@@ -16,6 +18,11 @@ void Pizza::createVeggies()
     auto veggies = _ingredientFactory.lock()->createVeggies();
     std::move(std::begin(veggies), std::end(veggies),
               std::back_inserter(_veggies));
+}
+
+void Pizza::addTopping(std::string top)
+{
+    _toppings.push_back(std::move(top));
 }
 
 void Pizza::cut() const
@@ -52,8 +59,15 @@ std::ostream &Pizza::print(std::ostream &os) const
     if (_clam)      os << _clam->name() << "\n";
     if (_pepperoni) os << _pepperoni->name() << "\n";
 
+    if (!_veggies.empty())
+        os << "Veggies:\n";
     for (const auto &veggie : _veggies)
-        if (veggie) os << veggie.get() << "\n";
+        if (veggie) os << "\t" << veggie->name() << "\n";
+
+    if (!_toppings.empty())
+        os << "Toppings:\n";
+    for (const auto &top : _toppings)
+        os << "\t" << top << "\n";
 
     return os;
 }

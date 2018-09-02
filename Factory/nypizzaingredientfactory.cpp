@@ -26,7 +26,7 @@ std::unique_ptr<Clams> NYPizzaIngredientFactory::createClam() const
     return std::make_unique<FreshClams>();
 }
 
-std::vector<std::unique_ptr<Veggies> > NYPizzaIngredientFactory::createVeggies() const
+std::vector<std::shared_ptr<Veggies> > NYPizzaIngredientFactory::createVeggies() const
 {
     return {std::make_unique<Garlic>(), std::make_unique<Onion>(),
             std::make_unique<Mushroom>(), std::make_unique<RedPepper>()};
