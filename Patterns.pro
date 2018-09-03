@@ -37,4 +37,5 @@ HEADERS += \
     Factory/pizzas.h \
     Factory/ingredients.h \
     Factory/chicagopizzaingredientfactory.h \
-    Factory/abstractpizza.h
+    Factory/abstractpizza.h \
+    Singlton/singlton.h

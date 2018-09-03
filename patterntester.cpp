@@ -12,6 +12,8 @@
 #include "Factory/chicagopizzastore.h"
 #include "Factory/nypizzastore.h"
 
+#include "Singlton/singlton.h"
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -37,6 +39,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::Factory:
         testFactory();
+        break;
+
+    case Pattern::Singlton:
+        testSinglton();
         break;
     }
 
@@ -142,6 +148,17 @@ void PatternTester::testFactory()
     std::cout << decorateMessage("Abstract Factory end", '-') << std::endl << std::endl;
 }
 
+void PatternTester::testSinglton()
+{
+    const Singlton &singlton1 = Singlton::instance();
+    const Singlton &singlton2 = Singlton::instance();
+//    const Singlton singlton3 = Singlton::instance(); // not allowed
+//    const Singlton singlton4 = std::move(Singlton::instance()); // not allowed
+
+    std::cout << "&singlton1: [" << &singlton1 << "] == &singlton2: [" << &singlton2 << "]"
+              << std::endl;
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -186,6 +203,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Factory:
         return "Factory";
+
+    case Pattern::Singlton:
+        return "Singlton";
     }
 
     return "No name";

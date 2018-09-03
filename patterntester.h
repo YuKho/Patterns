@@ -3,7 +3,7 @@
 
 #include <string>
 
-enum class Pattern { Strategy, Observer, Decorator, Factory };
+enum class Pattern { Strategy, Observer, Decorator, Factory, Singlton };
 
 class PatternTester
 {
@@ -15,6 +15,7 @@ private:
     static void testObserver();
     static void testDecorator();
     static void testFactory();
+    static void testSinglton();
 
     static void prinPreInfo(Pattern pattern);
     static void prinPostInfo(Pattern pattern);
