@@ -8,3 +8,4 @@ This project was created to show the simple examples of most common code pattern
 * Observer
 * Decorator
 * Factory
+* Singlton
