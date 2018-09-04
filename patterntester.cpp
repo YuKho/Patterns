@@ -150,13 +150,41 @@ void PatternTester::testFactory()
 
 void PatternTester::testSingleton()
 {
-    const Singleton &singleton1 = Singleton::instance();
-    const Singleton &singleton2 = Singleton::instance();
-//    const Singleton singleton3 = Singleton::instance(); // not allowed
-//    const Singleton singleton4 = std::move(Singleton::instance()); // not allowed
+    StaticSingleton &staticSingleton = StaticSingleton::instance();
+    auto &dynamicSingleton = DynamicSingleton::instance();
 
-    std::cout << "&singleton1: [" << &singleton1 << "] == &singleton2: [" << &singleton2 << "]"
+    staticSingleton.setData("Data changed");
+    dynamicSingleton->setData("Data changed");
+
+//    not allowed operations:
+//    StaticSingleton ss; // calling a private constructor of class 'StaticSingleton'
+//    DynamicSingleton ds; // calling a private constructor of class 'DynamicSingleton'
+//    StaticSingleton ss(staticSingleton); // use of deleted function
+//    DynamicSingleton ds(*dynamicSingleton); // use of deleted function
+
+
+    StaticSingleton &staticSingleton2 = StaticSingleton::instance();
+    auto &dynamicSingleton2 = DynamicSingleton::instance();
+
+    std::cout << "&staticSingleton address: [" << &staticSingleton
+              << "] == &staticSingleton2 address: [" << &staticSingleton2 << "]"
               << std::endl;
+
+    std::cout << "&dynamicSingleton address: [" << &dynamicSingleton
+              << "] == &dynamicSingleton2 address: [" << &dynamicSingleton2 << "]\n"
+              << std::endl;
+
+    std::cout << "staticSingleton2 data: " << staticSingleton2.data() << std::endl;
+    std::cout << "dynamicSingleton2 data: " << dynamicSingleton2->data() << std::endl;
+
+    DynamicSingleton::resetInstance(); // all references and pointers for 'DynamicSingleton' now
+                                       // are invalid.
+
+//    dynamicSingleton->data(); // Undefined Behaviour !!!
+
+    auto &dynamicSingleton3 = DynamicSingleton::instance();
+    std::cout << "dynamicSingleton3 has default data: " << dynamicSingleton3->data() << std::endl;
+
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)
