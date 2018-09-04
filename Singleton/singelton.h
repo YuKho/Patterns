@@ -1,22 +1,63 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
-class Singleton
+#include <memory>
+#include <string>
+
+class nocopymoveable
 {
 public:
-    Singleton(const Singleton &) = delete;
-    Singleton(Singleton &&) = delete;
-    Singleton& operator = (const Singleton &) = delete;
-    Singleton& operator = (Singleton &&) = delete;
+    nocopymoveable() = default;
+    nocopymoveable(const nocopymoveable &) = delete;
+    nocopymoveable(nocopymoveable &&) = delete;
+    nocopymoveable& operator = (const nocopymoveable &) = delete;
+    nocopymoveable& operator = (nocopymoveable &&) = delete;
+};
 
-    static const Singleton& instance()
+class StaticSingleton : private nocopymoveable
+{
+private:
+    StaticSingleton() = default;
+
+public:
+    static StaticSingleton& instance()
     {
-        const static Singleton _instance;
+        static StaticSingleton _instance;
         return _instance;
     }
 
+    std::string data() const { return _data; }
+    void setData(const std::string &data) { _data = data; }
+
 private:
-    Singleton() = default;
+    std::string _data{"Default Data"};
+};
+
+class DynamicSingleton : private nocopymoveable
+{
+private:
+    DynamicSingleton() = default;
+
+public:
+    static std::unique_ptr<DynamicSingleton>& instance()
+    {
+        static std::unique_ptr<DynamicSingleton> _instance{new DynamicSingleton};
+        if (!_instance)
+            _instance.reset(new DynamicSingleton);
+
+        return _instance;
+    }
+
+    static void resetInstance()
+    {
+        instance().reset();
+    }
+
+    std::string data() const { return _data; }
+    void setData(const std::string &data) { _data = data; }
+
+private:
+    std::string _data{"Default Data"};
 };
 
 #endif // SINGELTON_H
