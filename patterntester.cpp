@@ -12,7 +12,7 @@
 #include "Factory/chicagopizzastore.h"
 #include "Factory/nypizzastore.h"
 
-#include "Singlton/singlton.h"
+#include "Singleton/singelton.h"
 
 #include <iostream>
 #include <iomanip>
@@ -41,8 +41,8 @@ void PatternTester::testPattern(Pattern pattern)
         testFactory();
         break;
 
-    case Pattern::Singlton:
-        testSinglton();
+    case Pattern::Singleton:
+        testSingleton();
         break;
     }
 
@@ -148,14 +148,14 @@ void PatternTester::testFactory()
     std::cout << decorateMessage("Abstract Factory end", '-') << std::endl << std::endl;
 }
 
-void PatternTester::testSinglton()
+void PatternTester::testSingleton()
 {
-    const Singlton &singlton1 = Singlton::instance();
-    const Singlton &singlton2 = Singlton::instance();
-//    const Singlton singlton3 = Singlton::instance(); // not allowed
-//    const Singlton singlton4 = std::move(Singlton::instance()); // not allowed
+    const Singleton &singleton1 = Singleton::instance();
+    const Singleton &singleton2 = Singleton::instance();
+//    const Singleton singleton3 = Singleton::instance(); // not allowed
+//    const Singleton singleton4 = std::move(Singleton::instance()); // not allowed
 
-    std::cout << "&singlton1: [" << &singlton1 << "] == &singlton2: [" << &singlton2 << "]"
+    std::cout << "&singleton1: [" << &singleton1 << "] == &singleton2: [" << &singleton2 << "]"
               << std::endl;
 }
 
@@ -204,7 +204,7 @@ std::string PatternTester::patternName(Pattern pattern)
     case Pattern::Factory:
         return "Factory";
 
-    case Pattern::Singlton:
+    case Pattern::Singleton:
         return "Singlton";
     }
 
