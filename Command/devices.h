@@ -7,8 +7,6 @@ class Location
 {
 public:
     virtual ~Location() = default;
-
-protected:
     explicit Location(std::string _location);
 
 protected:
