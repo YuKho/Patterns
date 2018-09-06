@@ -41,4 +41,5 @@ HEADERS += \
     Factory/abstractpizza.h \
     Singleton/singelton.h \
     Command/command.h \
-    Command/devices.h
+    Command/devices.h \
+    Command/remotecontrol.h
