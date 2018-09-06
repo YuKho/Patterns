@@ -17,7 +17,8 @@ SOURCES += \
     Factory/chicagopizzaingredientfactory.cpp \
     Factory/abstractpizza.cpp \
     Factory/pizzastore.cpp \
-    Command/devices.cpp
+    Command/devices.cpp \
+    Command/commands.cpp
 
 HEADERS += \
     patterntester.h \
@@ -42,4 +43,5 @@ HEADERS += \
     Singleton/singelton.h \
     Command/command.h \
     Command/devices.h \
-    Command/remotecontrol.h
+    Command/remotecontrol.h \
+    Command/commands.h
