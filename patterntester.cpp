@@ -241,7 +241,7 @@ void PatternTester::prinPreInfo(Pattern pattern)
 
 void PatternTester::prinPostInfo(Pattern pattern)
 {
-    std::string message{patternName(pattern) + " pattern test finished:"};
+    std::string message{patternName(pattern) + " pattern test finished"};
     std::cout << decorateMessage(message) << std::endl << std::endl;
 }
 
