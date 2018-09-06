@@ -1,7 +1,7 @@
 #ifndef REMOTECONTROL_H
 #define REMOTECONTROL_H
 
-#include "command.h"
+#include "commands.h"
 
 #include <array>
 #include <memory>
@@ -59,13 +59,11 @@ void RemoteControl<Count>::offButtonWasPushed(size_t slot)
 template <size_t Count>
 void RemoteControl<Count>::init()
 {
-
-}
-
-template <size_t Count>
-std::ostream & operator << (std::ostream &os, const RemoteControl<Count> &remote)
-{
-    return os;
+    for (size_t i = 0; i < Count; ++i)
+    {
+        _onCommands[i] = std::make_shared<EmptyCommand>();
+        _offCommands[i] = std::make_shared<EmptyCommand>();
+    }
 }
 
 #endif // REMOTECONTROL_H
