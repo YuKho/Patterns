@@ -9,3 +9,4 @@ This project was created to show the simple examples of most common code pattern
 * Decorator
 * Factory
 * Singleton
+* Command
