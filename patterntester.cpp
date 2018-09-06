@@ -232,7 +232,7 @@ std::string PatternTester::patternName(Pattern pattern)
         return "Factory";
 
     case Pattern::Singleton:
-        return "Singlton";
+        return "Singleton";
     }
 
     return "No name";
