@@ -14,6 +14,10 @@
 
 #include "Singleton/singelton.h"
 
+#include "Command/remotecontrol.h"
+#include "Command/devices.h"
+#include "Command/commands.h"
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -43,6 +47,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::Singleton:
         testSingleton();
+        break;
+
+    case Pattern::Command:
+        testCommand();
         break;
     }
 
@@ -188,7 +196,41 @@ void PatternTester::testSingleton()
 
 void PatternTester::testCommand()
 {
+    auto remoteControl = std::make_unique<RemoteControl<7>>();
 
+    auto livingRoomLight = std::make_shared<Light>("Living Room");
+    auto kitchenLight = std::make_shared<Light>("Kitchen");
+    auto ceilingFan= std::make_shared<CeilingFan>("Living Room");
+    auto garageDoor = std::make_shared<GarageDoor>("");
+    auto stereo = std::make_shared<Stereo>("Living Room");
+
+    auto livingRoomLightOn = std::make_shared<LightOnCommand>(livingRoomLight);
+    auto livingRoomLightOff = std::make_shared<LightOffCommand>(livingRoomLight);
+    auto kitchenLightOn = std::make_shared<LightOnCommand>(kitchenLight);
+    auto kitchenLightOff = std::make_shared<LightOffCommand>(kitchenLight);
+
+    auto ceilingFanOn = std::make_shared<CeilingFanOnCommand>(ceilingFan);
+    auto ceilingFanOff = std::make_shared<CeilingFanOffCommand>(ceilingFan);
+
+    auto garageDoorUp = std::make_shared<GarageDoorUpCommand>(garageDoor);
+    auto garageDoorDown = std::make_shared<GarageDoorDownCommand>(garageDoor);
+
+    auto stereoOnWithCD = std::make_shared<StereoOnWithCDCommand>(stereo);
+    auto stereoOff = std::make_shared<StereoOffCommand>(stereo);
+
+    remoteControl->setCommand(0, livingRoomLightOn, livingRoomLightOff);
+    remoteControl->setCommand(1, kitchenLightOn, kitchenLightOff);
+    remoteControl->setCommand(2, ceilingFanOn, ceilingFanOff);
+    remoteControl->setCommand(3, stereoOnWithCD, stereoOff);
+
+    remoteControl->onButtonWasPushed(0);
+    remoteControl->offButtonWasPushed(0);
+    remoteControl->onButtonWasPushed(1);
+    remoteControl->offButtonWasPushed(1);
+    remoteControl->onButtonWasPushed(2);
+    remoteControl->offButtonWasPushed(2);
+    remoteControl->onButtonWasPushed(3);
+    remoteControl->offButtonWasPushed(3);
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)
