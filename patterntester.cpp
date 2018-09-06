@@ -186,6 +186,11 @@ void PatternTester::testSingleton()
     std::cout << "dynamicSingleton3 has default data: " << dynamicSingleton3->data() << std::endl;
 }
 
+void PatternTester::testCommand()
+{
+
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -233,6 +238,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Singleton:
         return "Singleton";
+
+    case Pattern::Command:
+        return "Command";
     }
 
     return "No name";

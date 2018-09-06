@@ -8,6 +8,7 @@ int main()
     PatternTester::testPattern(Pattern::Decorator);
     PatternTester::testPattern(Pattern::Factory);
     PatternTester::testPattern(Pattern::Singleton);
+    PatternTester::testPattern(Pattern::Command);
 
     std::cout << "All tests were finished." << std::endl;
 }
