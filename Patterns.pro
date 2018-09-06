@@ -16,7 +16,8 @@ SOURCES += \
     Factory/pizzas.cpp \
     Factory/chicagopizzaingredientfactory.cpp \
     Factory/abstractpizza.cpp \
-    Factory/pizzastore.cpp
+    Factory/pizzastore.cpp \
+    Command/devices.cpp
 
 HEADERS += \
     patterntester.h \
@@ -39,4 +40,5 @@ HEADERS += \
     Factory/chicagopizzaingredientfactory.h \
     Factory/abstractpizza.h \
     Singleton/singelton.h \
-    Command/command.h
+    Command/command.h \
+    Command/devices.h
