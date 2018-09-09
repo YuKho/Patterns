@@ -120,3 +120,63 @@ void StereoOffCommand::execute()
 {
     _stereo->off();
 }
+
+TVOffCommand::TVOffCommand(std::shared_ptr<Tv> tv) : _tv(std::move(tv))
+{
+}
+
+void TVOffCommand::execute()
+{
+    _tv->off();
+}
+
+void TVOffCommand::undo()
+{
+    _tv->on();
+}
+
+TVOnCommand::TVOnCommand(std::shared_ptr<Tv> tv) : _tv(std::move(tv))
+{
+}
+
+void TVOnCommand::execute()
+{
+    _tv->on();
+}
+
+void TVOnCommand::undo()
+{
+    _tv->off();
+}
+
+HottubOnCommand::HottubOnCommand(std::shared_ptr<Hottub> hottub) : _hottub(std::move(hottub))
+{
+}
+
+void HottubOnCommand::execute()
+{
+    _hottub->on();
+    _hottub->setTemperature(104);
+    _hottub->circulate();
+}
+
+void HottubOnCommand::undo()
+{
+    _hottub->off();
+}
+
+
+HottubOffCommand::HottubOffCommand(std::shared_ptr<Hottub> hottub) : _hottub(std::move(hottub))
+{
+}
+
+void HottubOffCommand::execute()
+{
+    _hottub->setTemperature(98);
+    _hottub->off();
+}
+
+void HottubOffCommand::undo()
+{
+    _hottub->on();
+}

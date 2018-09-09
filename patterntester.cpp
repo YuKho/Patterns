@@ -17,6 +17,7 @@
 #include "Command/remotecontrol.h"
 #include "Command/devices.h"
 #include "Command/commands.h"
+#include "Command/macrocommand.h"
 
 #include <iostream>
 #include <iomanip>
@@ -196,13 +197,15 @@ void PatternTester::testSingleton()
 
 void PatternTester::testCommand()
 {
-    auto remoteControl = std::make_unique<RemoteControl<7>>();
+    auto remoteControl = std::make_unique<RemoteControl<8>>();
 
     auto livingRoomLight = std::make_shared<Light>("Living Room");
+    auto tv = std::make_shared<Tv>("Living Room");
     auto kitchenLight = std::make_shared<Light>("Kitchen");
     auto ceilingFan= std::make_shared<CeilingFan>("Living Room");
-    auto garageDoor = std::make_shared<GarageDoor>("");
+    auto garageDoor = std::make_shared<GarageDoor>("House");
     auto stereo = std::make_shared<Stereo>("Living Room");
+    auto hottub = std::make_shared<Hottub>("Bath Room");
 
     auto livingRoomLightOn = std::make_shared<LightOnCommand>(livingRoomLight);
     auto livingRoomLightOff = std::make_shared<LightOffCommand>(livingRoomLight);
@@ -220,6 +223,18 @@ void PatternTester::testCommand()
     auto stereoOnWithCD = std::make_shared<StereoOnWithCDCommand>(stereo);
     auto stereoOff = std::make_shared<StereoOffCommand>(stereo);
 
+    auto tvOn = std::make_shared<TVOnCommand>(tv);
+    auto tvOff = std::make_shared<TVOffCommand>(tv);
+    auto hottubOn = std::make_shared<HottubOnCommand>(hottub);
+    auto hottubOff = std::make_shared<HottubOffCommand>(hottub);
+
+    std::vector<std::shared_ptr<Command>> partyOn {livingRoomLightOn, stereoOnWithCD,
+                                                   tvOn, hottubOn};
+    std::vector<std::shared_ptr<Command>> partyOff {livingRoomLightOff, stereoOff,
+                                                   tvOff, hottubOff};
+    auto partyOnMacro = std::make_shared<MacroCommand>(std::move(partyOn));
+    auto partyOffMacro = std::make_shared<MacroCommand>(std::move(partyOff));
+
     remoteControl->setCommand(0, livingRoomLightOn, livingRoomLightOff);
     remoteControl->setCommand(1, kitchenLightOn, kitchenLightOff);
 
@@ -229,6 +244,8 @@ void PatternTester::testCommand()
     remoteControl->setCommand(5, ceilingFanOff, ceilingFanOff);
 
     remoteControl->setCommand(6, stereoOnWithCD, stereoOff);
+
+    remoteControl->setCommand(7, partyOnMacro, partyOffMacro);
 
     remoteControl->onButtonWasPushed(0);
     remoteControl->offButtonWasPushed(0);
@@ -244,6 +261,11 @@ void PatternTester::testCommand()
     remoteControl->onButtonWasPushed(3);
     remoteControl->onButtonWasPushed(4);
     remoteControl->undoButtonWasPushed();
+
+    std::cout << "--- Pushing Macro On---" << std::endl;
+    remoteControl->onButtonWasPushed(7);
+    std::cout << "--- Pushing Macro Off---" << std::endl;
+    remoteControl->offButtonWasPushed(7);
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)

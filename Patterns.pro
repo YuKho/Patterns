@@ -18,7 +18,8 @@ SOURCES += \
     Factory/abstractpizza.cpp \
     Factory/pizzastore.cpp \
     Command/devices.cpp \
-    Command/commands.cpp
+    Command/commands.cpp \
+    Command/macrocommand.cpp
 
 HEADERS += \
     patterntester.h \
@@ -44,4 +45,5 @@ HEADERS += \
     Command/command.h \
     Command/devices.h \
     Command/remotecontrol.h \
-    Command/commands.h
+    Command/commands.h \
+    Command/macrocommand.h

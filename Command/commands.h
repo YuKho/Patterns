@@ -8,6 +8,8 @@ class Light;
 class GarageDoor;
 class CeilingFan;
 class Stereo;
+class Hottub;
+class Tv;
 
 class EmptyCommand : public Command
 {
@@ -123,6 +125,50 @@ public:
 
 private:
     std::shared_ptr<Stereo> _stereo;
+};
+
+class TVOffCommand : public Command
+{
+public:
+    explicit TVOffCommand(std::shared_ptr<Tv> tv);
+    void execute() override;
+    void undo() override;
+
+private:
+    std::shared_ptr<Tv> _tv;
+};
+
+class TVOnCommand : public Command
+{
+public:
+    explicit TVOnCommand(std::shared_ptr<Tv> tv);
+    void execute() override;
+    void undo() override;
+
+private:
+    std::shared_ptr<Tv> _tv;
+};
+
+class HottubOnCommand : public Command
+{
+public:
+    explicit HottubOnCommand(std::shared_ptr<Hottub> hottub);
+    void execute() override;
+    void undo() override;
+
+private:
+    std::shared_ptr<Hottub> _hottub;
+};
+
+class HottubOffCommand : public Command
+{
+public:
+    explicit HottubOffCommand(std::shared_ptr<Hottub> hottub);
+    void execute() override;
+    void undo() override;
+
+private:
+    std::shared_ptr<Hottub> _hottub;
 };
 
 #endif // COMMANDS_H

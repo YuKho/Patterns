@@ -70,4 +70,34 @@ public:
     void setVolume(int volume);
 };
 
+class Tv : private Location
+{
+public:
+    using Location::Location;
+
+    void on() const;
+    void off() const;
+    void setInputChannelForDvd();
+
+private:
+    int _channel = 1;
+};
+
+class Hottub : private Location
+{
+public:
+    using Location::Location;
+
+    void on();
+    void off();
+    void circulate() const;
+    void jetsOn() const;
+    void jetsOff() const;
+    void setTemperature(int temperature);
+
+private:
+    bool _on {false};
+    int _temperature = 18;
+};
+
 #endif // DEVICES_H

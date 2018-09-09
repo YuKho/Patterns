@@ -48,6 +48,7 @@ template <size_t Count>
 void RemoteControl<Count>::onButtonWasPushed(size_t slot)
 {
     assert(slot < Count);
+    std::cout << "[slot " << slot << "] ";
     _onCommands[slot]->execute();
     _undoCommand = _onCommands[slot];
 }
@@ -56,6 +57,7 @@ template <size_t Count>
 void RemoteControl<Count>::offButtonWasPushed(size_t slot)
 {
     assert(slot < Count);
+    std::cout << "[slot " << slot << "] ";
     _offCommands[slot]->execute();
     _undoCommand = _offCommands[slot];
 }
@@ -63,7 +65,7 @@ void RemoteControl<Count>::offButtonWasPushed(size_t slot)
 template <size_t Count>
 void RemoteControl<Count>::undoButtonWasPushed() const
 {
-    std::cout << "Undo: ";
+    std::cout << "[ undo ]";
     _undoCommand->undo();
 }
 

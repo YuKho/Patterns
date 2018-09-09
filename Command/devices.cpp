@@ -125,3 +125,57 @@ void Stereo::setVolume(int volume)
     // valid range: 1-11 (after all 11 is better than 10, right?)
     std::cout << _location << " Stereo volume set to " << volume << std::endl;
 }
+
+void Tv::on() const
+{
+    std::cout << _location << " TV is on" << std::endl;
+}
+
+void Tv::off() const
+{
+    std::cout << _location << " TV is off" << std::endl;
+}
+
+void Tv::setInputChannelForDvd()
+{
+    _channel = 3;
+    std::cout << _location << " TV channel is set for DVD" << std::endl;
+}
+
+void Hottub::on()
+{
+    _on = true;
+}
+
+void Hottub::off()
+{
+    _on = false;
+}
+
+void Hottub::circulate() const
+{
+    if (_on)
+        std::cout << "Hottub is bubbling!" << std::endl;
+}
+
+void Hottub::jetsOn() const
+{
+    if (_on)
+        std::cout << "Hottub jets are on" << std::endl;
+}
+
+void Hottub::jetsOff() const
+{
+    if (_on)
+        std::cout << "Hottub jets are off" << std::endl;
+}
+
+void Hottub::setTemperature(int temperature)
+{
+    if (temperature > _temperature)
+        std::cout << "Hottub is heating to a steaming " << temperature << " degrees" << std::endl;
+    else
+        std::cout << "Hottub is cooling to " << temperature << " degrees" << std::endl;
+
+    _temperature = temperature;
+}
