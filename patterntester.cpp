@@ -19,6 +19,10 @@
 #include "Command/commands.h"
 #include "Command/macrocommand.h"
 
+#include "Adapter/ducks.h"
+#include "Adapter/turkeys.h"
+#include "Adapter/adapters.h"
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -52,6 +56,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::Command:
         testCommand();
+        break;
+
+    case Pattern::Adapter:
+        testAdapter();
         break;
     }
 
@@ -268,6 +276,30 @@ void PatternTester::testCommand()
     remoteControl->offButtonWasPushed(7);
 }
 
+void PatternTester::testAdapter()
+{
+    const auto testDuck = [](SimpleDuck *duck)
+    {
+        duck->quack();
+        duck->fly();
+    };
+
+    auto duck = std::make_shared<SimpleMallardDuck>();
+    auto turkey = std::make_shared<WildTurkey>();
+
+    auto turkeyAdapter = std::make_shared<TurkeyAdapter>(turkey);
+
+    std::cout << "The Turkey says..." << std::endl;
+    turkey->gobble();
+    turkey->fly();
+
+    std::cout << "\nThe Duck says..." << std::endl;
+    testDuck(duck.get());
+
+    std::cout << "\nThe TurkeyAdapter says..." << std::endl;
+    testDuck(turkeyAdapter.get());
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -318,6 +350,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Command:
         return "Command";
+
+    case Pattern::Adapter:
+        return "Adapter";
     }
 
     return "No name";

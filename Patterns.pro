@@ -19,7 +19,8 @@ SOURCES += \
     Factory/pizzastore.cpp \
     Command/devices.cpp \
     Command/commands.cpp \
-    Command/macrocommand.cpp
+    Command/macrocommand.cpp \
+    Adapter/adapters.cpp
 
 HEADERS += \
     patterntester.h \
@@ -46,4 +47,7 @@ HEADERS += \
     Command/devices.h \
     Command/remotecontrol.h \
     Command/commands.h \
-    Command/macrocommand.h
+    Command/macrocommand.h \
+    Adapter/turkeys.h \
+    Adapter/ducks.h \
+    Adapter/adapters.h
