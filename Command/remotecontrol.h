@@ -18,6 +18,7 @@ public:
                     const std::shared_ptr<Command> &offCommand);
     void onButtonWasPushed(size_t slot);
     void offButtonWasPushed(size_t slot);
+    void undoButtonWasPushed() const;
 
 private:
      void init();
@@ -25,6 +26,7 @@ private:
 private:
     std::array<std::shared_ptr<Command>, Count> _onCommands;
     std::array<std::shared_ptr<Command>, Count> _offCommands;
+    std::shared_ptr<Command> _undoCommand;
 };
 
 template <size_t Count>
@@ -47,6 +49,7 @@ void RemoteControl<Count>::onButtonWasPushed(size_t slot)
 {
     assert(slot < Count);
     _onCommands[slot]->execute();
+    _undoCommand = _onCommands[slot];
 }
 
 template <size_t Count>
@@ -54,6 +57,14 @@ void RemoteControl<Count>::offButtonWasPushed(size_t slot)
 {
     assert(slot < Count);
     _offCommands[slot]->execute();
+    _undoCommand = _offCommands[slot];
+}
+
+template <size_t Count>
+void RemoteControl<Count>::undoButtonWasPushed() const
+{
+    std::cout << "Undo: ";
+    _undoCommand->undo();
 }
 
 template <size_t Count>
@@ -64,6 +75,7 @@ void RemoteControl<Count>::init()
         _onCommands[i] = std::make_shared<EmptyCommand>();
         _offCommands[i] = std::make_shared<EmptyCommand>();
     }
+    _undoCommand = std::make_shared<EmptyCommand>();
 }
 
 #endif // REMOTECONTROL_H

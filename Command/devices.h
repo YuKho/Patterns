@@ -20,6 +20,11 @@ public:
 
     void on();
     void off();
+    void dim(int level);
+    int getLevel() const;
+
+private:
+    int _level;
 };
 
 class GarageDoor : private Location
@@ -37,19 +42,19 @@ public:
 class CeilingFan : private Location
 {
 public:
+    enum class Level { OFF, LOW, MEDIUM, HIGH };
+
+public:
     using Location::Location;
 
     void high();
     void medium();
     void low();
     void off();
-    int getSpeed();
+    Level getSpeed();
 
 private:
-    int level;
-    static const int HIGH = 2;
-    static const int MEDIUM = 1;
-    static const int LOW = 0;
+    Level _level;
 };
 
 class Stereo : private Location

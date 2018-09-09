@@ -209,7 +209,9 @@ void PatternTester::testCommand()
     auto kitchenLightOn = std::make_shared<LightOnCommand>(kitchenLight);
     auto kitchenLightOff = std::make_shared<LightOffCommand>(kitchenLight);
 
-    auto ceilingFanOn = std::make_shared<CeilingFanOnCommand>(ceilingFan);
+    auto ceilingFanHigh = std::make_shared<CeilingFanHighCommand>(ceilingFan);
+    auto ceilingFanMedium = std::make_shared<CeilingFanMediumCommand>(ceilingFan);
+    auto ceilingFanLow = std::make_shared<CeilingFanLowCommand>(ceilingFan);
     auto ceilingFanOff = std::make_shared<CeilingFanOffCommand>(ceilingFan);
 
     auto garageDoorUp = std::make_shared<GarageDoorUpCommand>(garageDoor);
@@ -220,17 +222,28 @@ void PatternTester::testCommand()
 
     remoteControl->setCommand(0, livingRoomLightOn, livingRoomLightOff);
     remoteControl->setCommand(1, kitchenLightOn, kitchenLightOff);
-    remoteControl->setCommand(2, ceilingFanOn, ceilingFanOff);
-    remoteControl->setCommand(3, stereoOnWithCD, stereoOff);
+
+    remoteControl->setCommand(2, ceilingFanHigh, ceilingFanOff);
+    remoteControl->setCommand(3, ceilingFanMedium, ceilingFanOff);
+    remoteControl->setCommand(4, ceilingFanLow, ceilingFanOff);
+    remoteControl->setCommand(5, ceilingFanOff, ceilingFanOff);
+
+    remoteControl->setCommand(6, stereoOnWithCD, stereoOff);
 
     remoteControl->onButtonWasPushed(0);
     remoteControl->offButtonWasPushed(0);
-    remoteControl->onButtonWasPushed(1);
-    remoteControl->offButtonWasPushed(1);
+    remoteControl->undoButtonWasPushed();
+    remoteControl->offButtonWasPushed(0);
+    remoteControl->onButtonWasPushed(0);
+    remoteControl->undoButtonWasPushed();
+
     remoteControl->onButtonWasPushed(2);
     remoteControl->offButtonWasPushed(2);
+    remoteControl->undoButtonWasPushed();
+    remoteControl->offButtonWasPushed(2);
     remoteControl->onButtonWasPushed(3);
-    remoteControl->offButtonWasPushed(3);
+    remoteControl->onButtonWasPushed(4);
+    remoteControl->undoButtonWasPushed();
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)

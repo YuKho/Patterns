@@ -5,7 +5,8 @@ class Command
 {
 public:
     virtual ~Command() = default;
-    virtual void execute() const = 0;
+    virtual void execute() = 0;
+    virtual void undo() {}
 };
 
 #endif // COMMAND_H

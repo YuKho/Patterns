@@ -12,34 +12,41 @@ class Stereo;
 class EmptyCommand : public Command
 {
 public:
-    void execute() const override;
+    void execute() override;
 };
 
-class LightOnCommand : public Command
+class LightCommand : public Command
 {
 public:
-    explicit LightOnCommand(std::shared_ptr<Light> light);
-    void execute() const override;
+    explicit LightCommand(std::shared_ptr<Light> light);
+    void undo() override;
 
-private:
+protected:
     std::shared_ptr<Light> _light;
+    int _level = 0;
 };
 
-class LightOffCommand : public Command
+class LightOnCommand : public LightCommand
 {
 public:
-    explicit LightOffCommand(std::shared_ptr<Light> light);
-    void execute() const override;
+    using LightCommand::LightCommand;
 
-private:
-    std::shared_ptr<Light> _light;
+    void execute() override;
+};
+
+class LightOffCommand : public LightCommand
+{
+public:
+    using LightCommand::LightCommand;
+
+    void execute() override;
 };
 
 class GarageDoorUpCommand : public Command
 {
 public:
     explicit GarageDoorUpCommand(std::shared_ptr<GarageDoor> garageDoor);
-    void execute() const override;
+    void execute() override;
 
 private:
     std::shared_ptr<GarageDoor> _garageDoor;
@@ -49,37 +56,60 @@ class GarageDoorDownCommand : public Command
 {
 public:
     explicit GarageDoorDownCommand(std::shared_ptr<GarageDoor> garageDoor);
-    void execute() const override;
+    void execute() override;
 
 private:
     std::shared_ptr<GarageDoor> _garageDoor;
 };
 
-class CeilingFanOnCommand : public Command
+class CeilingFanCommand : public Command
 {
 public:
-    explicit CeilingFanOnCommand(std::shared_ptr<CeilingFan> ceilingFan);
-    void execute() const override;
+    explicit CeilingFanCommand(std::shared_ptr<CeilingFan> ceilingFan);
+    void undo() override;
 
-private:
+protected:
     std::shared_ptr<CeilingFan> _ceilingFan;
+    int _prevSpeed = 0;
 };
 
-class CeilingFanOffCommand : public Command
+class CeilingFanHighCommand : public CeilingFanCommand
 {
 public:
-    explicit CeilingFanOffCommand(std::shared_ptr<CeilingFan> ceilingFan);
-    void execute() const override;
+    using CeilingFanCommand::CeilingFanCommand;
 
-private:
-    std::shared_ptr<CeilingFan> _ceilingFan;
+    void execute() override;
+};
+
+class CeilingFanMediumCommand : public CeilingFanCommand
+{
+public:
+    using CeilingFanCommand::CeilingFanCommand;
+
+    void execute() override;
+};
+
+class CeilingFanLowCommand : public CeilingFanCommand
+{
+public:
+    using CeilingFanCommand::CeilingFanCommand;
+
+    void execute() override;
+};
+
+class CeilingFanOffCommand : public CeilingFanCommand
+{
+public:
+    using CeilingFanCommand::CeilingFanCommand;
+
+    void execute() override;
 };
 
 class StereoOnWithCDCommand : public Command
 {
 public:
     explicit StereoOnWithCDCommand(std::shared_ptr<Stereo> stereo);
-    void execute() const override;
+    void execute() override;
 
 private:
     std::shared_ptr<Stereo> _stereo;
@@ -89,7 +119,7 @@ class StereoOffCommand : public Command
 {
 public:
     explicit StereoOffCommand(std::shared_ptr<Stereo> stereo);
-    void execute() const override;
+    void execute() override;
 
 private:
     std::shared_ptr<Stereo> _stereo;
