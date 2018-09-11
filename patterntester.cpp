@@ -278,16 +278,17 @@ void PatternTester::testCommand()
 
 void PatternTester::testAdapter()
 {
-    const auto testDuck = [](SimpleDuck *duck)
+    const auto testDuck = [](AbstractDuck *duck)
     {
         duck->quack();
         duck->fly();
     };
 
-    auto duck = std::make_shared<SimpleMallardDuck>();
+    auto duck = std::make_shared<WildDuck>();
     auto turkey = std::make_shared<WildTurkey>();
 
-    auto turkeyAdapter = std::make_shared<TurkeyAdapter>(turkey);
+    auto turkeyObjectAdapter = std::make_shared<TurkeyObjectAdapter>(turkey);
+    auto turkeyClassAdapter = std::make_shared<TurkeyClassAdapter>();
 
     std::cout << "The Turkey says..." << std::endl;
     turkey->gobble();
@@ -296,8 +297,11 @@ void PatternTester::testAdapter()
     std::cout << "\nThe Duck says..." << std::endl;
     testDuck(duck.get());
 
-    std::cout << "\nThe TurkeyAdapter says..." << std::endl;
-    testDuck(turkeyAdapter.get());
+    std::cout << "\nThe TurkeyObjectAdapter says..." << std::endl;
+    testDuck(turkeyObjectAdapter.get());
+
+    std::cout << "\nThe TurkeyClassAdapter says..." << std::endl;
+    testDuck(turkeyClassAdapter.get());
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)
