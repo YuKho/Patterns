@@ -3,15 +3,15 @@
 
 #include <iostream>
 
-class SimpleDuck
+class AbstractDuck
 {
 public:
-    virtual ~SimpleDuck() = default;
+    virtual ~AbstractDuck() = default;
     virtual void quack() const = 0;
     virtual void fly() const = 0;
 };
 
-class SimpleMallardDuck : public SimpleDuck
+class WildDuck : public AbstractDuck
 {
 public:
     void quack() const override
