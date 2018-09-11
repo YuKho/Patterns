@@ -20,7 +20,9 @@ SOURCES += \
     Command/devices.cpp \
     Command/commands.cpp \
     Command/macrocommand.cpp \
-    Adapter/adapters.cpp
+    Adapter/adapters.cpp \
+    Facade/hometheaterfacade.cpp \
+    Facade/electronics.cpp
 
 HEADERS += \
     patterntester.h \
@@ -50,4 +52,6 @@ HEADERS += \
     Command/macrocommand.h \
     Adapter/turkeys.h \
     Adapter/ducks.h \
-    Adapter/adapters.h
+    Adapter/adapters.h \
+    Facade/hometheaterfacade.h \
+    Facade/electronics.h

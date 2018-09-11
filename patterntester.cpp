@@ -304,6 +304,11 @@ void PatternTester::testAdapter()
     testDuck(turkeyClassAdapter.get());
 }
 
+void PatternTester::testFacade()
+{
+
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -357,6 +362,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Adapter:
         return "Adapter";
+
+    case Pattern::Facade:
+        return "Facade";
     }
 
     return "No name";
