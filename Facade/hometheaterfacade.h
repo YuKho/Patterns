@@ -24,6 +24,9 @@ public:
                       std::shared_ptr<Screen> screen,
                       std::shared_ptr<PopcornPopper> popper);
 
+    void watchMovie(const std::string &movie) const;
+    void endMovie() const;
+
     static std::unique_ptr<HomeTheaterFacade> createFacade();
 
 private:
