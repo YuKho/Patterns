@@ -130,7 +130,7 @@ void DvdPlayer::off() const
 
 void DvdPlayer::eject()
 {
-    _movie.clear()
+    _movie.clear();
     std::cout << _description << " eject" << std::endl;
 }
 
@@ -178,6 +178,139 @@ void DvdPlayer::setSurroundAudio() const
 }
 
 std::string DvdPlayer::toString() const
+{
+    return _description;
+}
+
+PopcornPopper::PopcornPopper(std::string description) : _description(std::move(description))
+{
+}
+
+void PopcornPopper::on() const
+{
+    std::cout << _description << " on" << std::endl;
+}
+
+void PopcornPopper::off() const
+{
+    std::cout << _description << " off" << std::endl;
+}
+
+void PopcornPopper::pop() const
+{
+    std::cout << _description << " popping popcorn!" << std::endl;
+}
+
+std::string PopcornPopper::toString() const
+{
+    return _description;
+}
+
+Projector::Projector(std::string description, std::shared_ptr<DvdPlayer> dvdPlayer)
+    : _description(std::move(description)), _dvdPlayer(std::move(dvdPlayer))
+{
+}
+
+void Projector::on() const
+{
+    std::cout << _description << " on" << std::endl;
+}
+
+void Projector::off() const
+{
+    std::cout << _description << " off" << std::endl;
+}
+
+void Projector::wideScreenMode() const
+{
+    std::cout << _description << " in widescreen mode (16x9 aspect ratio)" << std::endl;
+}
+
+void Projector::tvMode() const
+{
+    std::cout << _description << " in tv mode (4x3 aspect ratio)" << std::endl;
+}
+
+std::string Projector::toString() const
+{
+    return _description;
+}
+
+Screen::Screen(std::string description) : _description(std::move(description))
+{
+}
+
+void Screen::up() const
+{
+    std::cout << _description << " going up" << std::endl;
+}
+
+void Screen::down() const
+{
+    std::cout << _description << " going down" << std::endl;
+}
+
+std::string Screen::toString() const
+{
+    return _description;
+}
+
+TheaterLights::TheaterLights(std::string description) : _description(std::move(description))
+{
+}
+
+void TheaterLights::on() const
+{
+    std::cout << _description << " on" << std::endl;
+}
+
+void TheaterLights::off() const
+{
+    std::cout << _description << " off" << std::endl;
+}
+
+void TheaterLights::dim(int level) const
+{
+    std::cout << _description << " dimming to " << level  << "%" << std::endl;
+}
+
+std::string TheaterLights::toString() const
+{
+    return _description;
+}
+
+Tuner::Tuner(std::string description, std::shared_ptr<Amplifier> amplifier)
+    : _description(std::move(description)), _amplifier(std::move(amplifier))
+{
+}
+
+void Tuner::on() const
+{
+    std::cout << _description << " on" << std::endl;
+}
+
+void Tuner::off() const
+{
+    std::cout << _description << " off" << std::endl;
+}
+
+void Tuner::setFrequency(double frequency)
+{
+    std::cout << _description << " setting frequency to " << frequency << std::endl;
+    _frequency = frequency;
+}
+
+void Tuner::setAm() const
+{
+    std::cout << _description << " setting AM mode" << std::endl;
+}
+
+void Tuner::setFm() const
+{
+    std::cout << _description << " setting FM mode" << std::endl;
+}
+
+std::string Tuner::toString() const
 {
     return _description;
 }

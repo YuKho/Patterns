@@ -71,4 +71,74 @@ private:
     std::string _movie;
 };
 
+class PopcornPopper
+{
+public:
+    explicit PopcornPopper(std::string description);
+    void on() const;
+    void off() const;
+    void pop() const;
+    std::string toString() const;
+
+private:
+    std::string _description;
+};
+
+class Projector
+{
+public:
+    Projector(std::string description, std::shared_ptr<DvdPlayer> dvdPlayer);
+    void on() const;
+    void off() const;
+    void wideScreenMode() const;
+    void tvMode() const;
+    std::string toString() const;
+
+private:
+     std::string _description;
+     std::shared_ptr<DvdPlayer> _dvdPlayer;
+};
+
+class Screen
+{
+public:
+    explicit Screen(std::string description);
+    void up() const;
+    void down() const;
+    std::string toString() const;
+
+private:
+    std::string _description;
+};
+
+class TheaterLights
+{
+public:
+    explicit TheaterLights(std::string description);
+    void on() const;
+    void off() const;
+    void dim(int level) const;
+    std::string toString() const;
+
+private:
+    std::string _description;
+};
+
+class Tuner
+{
+public:
+    Tuner(std::string description, std::shared_ptr<Amplifier> amplifier);
+    void on() const;
+    void off() const;
+    void setFrequency(double frequency);
+    void setAm() const;
+    void setFm() const;
+    std::string toString() const;
+
+private:
+    std::string _description;
+    std::shared_ptr<Amplifier> _amplifier;
+    double _frequency = 0;
+};
+
 #endif // ELECTRONICS_H
