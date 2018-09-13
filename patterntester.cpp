@@ -23,6 +23,8 @@
 #include "Adapter/turkeys.h"
 #include "Adapter/adapters.h"
 
+#include "Facade/hometheaterfacade.h"
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -60,6 +62,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::Adapter:
         testAdapter();
+        break;
+
+    case Pattern::Facade:
+        testFacade();
         break;
     }
 
@@ -306,7 +312,9 @@ void PatternTester::testAdapter()
 
 void PatternTester::testFacade()
 {
-
+    auto homeTheater = HomeTheaterFacade::createFacade();
+    homeTheater->watchMovie("Raiders of the Lost Ark");
+    homeTheater->endMovie();
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)
