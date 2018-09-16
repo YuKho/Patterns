@@ -314,6 +314,7 @@ void PatternTester::testFacade()
 {
     auto homeTheater = HomeTheaterFacade::createFacade();
     homeTheater->watchMovie("Raiders of the Lost Ark");
+    std::cout << std::endl;
     homeTheater->endMovie();
 }
 

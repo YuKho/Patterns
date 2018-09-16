@@ -1,6 +1,7 @@
 #include "hometheaterfacade.h"
 #include "electronics.h"
 #include <utility>
+#include <iostream>
 
 HomeTheaterFacade::HomeTheaterFacade(std::shared_ptr<Amplifier> amp,
                                      std::shared_ptr<Tuner> tuner,
@@ -23,12 +24,32 @@ HomeTheaterFacade::HomeTheaterFacade(std::shared_ptr<Amplifier> amp,
 
 void HomeTheaterFacade::watchMovie(const std::string &movie) const
 {
-
+    std::cout << "Get ready to watch a movie..." << std::endl;
+    _popper->on();
+    _popper->pop();
+    _lights->dim(10);
+    _screen->down();
+    _projector->on();
+    _projector->wideScreenMode();
+    _amp->on();
+    _amp->setDvd(_dvd);
+    _amp->setSurroundSound();
+    _amp->setVolume(5);
+    _dvd->on();
+    _dvd->play(movie);
 }
 
 void HomeTheaterFacade::endMovie() const
 {
-
+    std::cout << "Shutting movie theater down..." << std::endl;
+    _popper->off();
+    _lights->on();
+    _screen->up();
+    _projector->off();
+    _amp->off();
+    _dvd->stop();
+    _dvd->eject();
+    _dvd->off();
 }
 
 std::unique_ptr<HomeTheaterFacade> HomeTheaterFacade::createFacade()
