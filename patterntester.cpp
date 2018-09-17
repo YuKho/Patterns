@@ -25,6 +25,8 @@
 
 #include "Facade/hometheaterfacade.h"
 
+#include "TemplateMethod/beverages.h"
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -66,6 +68,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::Facade:
         testFacade();
+        break;
+
+    case Pattern::TemplateMethod:
+        testTemplateMethod();
         break;
     }
 
@@ -318,6 +324,28 @@ void PatternTester::testFacade()
     homeTheater->endMovie();
 }
 
+void PatternTester::testTemplateMethod()
+{
+    auto tea = std::make_unique<Tea>();
+    auto coffee = std::make_unique<Coffee>();
+
+    std::cout << "\nMaking tea..." << std::endl;
+    tea->prepareRecipe();
+
+    std::cout << "\nMaking coffee..." << std::endl;
+    coffee->prepareRecipe();
+
+
+//    auto teaHook = new TeaWithHook();
+//    CoffeeWithHook coffeeHook = new CoffeeWithHook();
+
+//    std::cout << "\nMaking tea..." << std::endl;
+//    teaHook.prepareRecipe();
+
+//    std::cout << "\nMaking coffee..." << std::endl;
+//    coffeeHook.prepareRecipe();
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -374,6 +402,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Facade:
         return "Facade";
+
+    case Pattern::TemplateMethod:
+        return "TemplateMethod";
     }
 
     return "No name";

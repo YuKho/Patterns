@@ -22,7 +22,9 @@ SOURCES += \
     Command/macrocommand.cpp \
     Adapter/adapters.cpp \
     Facade/hometheaterfacade.cpp \
-    Facade/electronics.cpp
+    Facade/electronics.cpp \
+    TemplateMethod/caffeinebeverage.cpp \
+    TemplateMethod/beverages.cpp
 
 HEADERS += \
     patterntester.h \
@@ -54,4 +56,6 @@ HEADERS += \
     Adapter/ducks.h \
     Adapter/adapters.h \
     Facade/hometheaterfacade.h \
-    Facade/electronics.h
+    Facade/electronics.h \
+    TemplateMethod/caffeinebeverage.h \
+    TemplateMethod/beverages.h
