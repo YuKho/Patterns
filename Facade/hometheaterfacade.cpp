@@ -63,6 +63,8 @@ std::unique_ptr<HomeTheaterFacade> HomeTheaterFacade::createFacade()
     auto screen = std::make_shared<Screen>("Theater Screen");
     auto popper = std::make_shared<PopcornPopper>("Popcorn Popper");
 
-    return std::make_unique<HomeTheaterFacade>(amp, tuner, dvd, cd, projector, lights, screen,
-                                               popper);
+    return std::make_unique<HomeTheaterFacade>(std::move(amp), std::move(tuner), std::move(dvd),
+                                               std::move(cd), std::move(projector),
+                                               std::move(lights), std::move(screen),
+                                               std::move(popper));
 }

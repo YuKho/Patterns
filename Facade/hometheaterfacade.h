@@ -2,6 +2,7 @@
 #define HOMETHEATERFACADE_H
 
 #include <memory>
+#include <string>
 
 class Amplifier;
 class Tuner;
