@@ -11,6 +11,11 @@ void Tea::addCondiments() const
     std::cout << "Adding Lemon to the tea" << std::endl;
 }
 
+bool Tea::customerWantsCondiments() const
+{
+    return false;
+}
+
 void Coffee::brew() const
 {
     std::cout << "Dripping Coffee through filter" << std::endl;

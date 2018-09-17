@@ -7,6 +7,7 @@ public:
     virtual ~CaffeineBeverage() = default;
     virtual void brew() const = 0;
     virtual void addCondiments() const = 0;
+    virtual bool customerWantsCondiments() const;
 
     void prepareRecipe();
 

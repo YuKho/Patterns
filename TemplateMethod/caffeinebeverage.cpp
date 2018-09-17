@@ -1,12 +1,22 @@
 #include "caffeinebeverage.h"
 #include <iostream>
 
+bool CaffeineBeverage::customerWantsCondiments() const
+{
+    return true;
+}
+
 void CaffeineBeverage::prepareRecipe()
 {
     boilWater();
     brew();
     pourInCup();
-    addCondiments();
+
+    if (customerWantsCondiments())
+    {
+        std::cout << "[Customer wants condiments]" << std::endl;
+        addCondiments();
+    }
 }
 
 void CaffeineBeverage::boilWater() const

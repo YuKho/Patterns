@@ -329,21 +329,11 @@ void PatternTester::testTemplateMethod()
     auto tea = std::make_unique<Tea>();
     auto coffee = std::make_unique<Coffee>();
 
-    std::cout << "\nMaking tea..." << std::endl;
+    std::cout << "Making tea..." << std::endl;
     tea->prepareRecipe();
 
     std::cout << "\nMaking coffee..." << std::endl;
     coffee->prepareRecipe();
-
-
-//    auto teaHook = new TeaWithHook();
-//    CoffeeWithHook coffeeHook = new CoffeeWithHook();
-
-//    std::cout << "\nMaking tea..." << std::endl;
-//    teaHook.prepareRecipe();
-
-//    std::cout << "\nMaking coffee..." << std::endl;
-//    coffeeHook.prepareRecipe();
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)

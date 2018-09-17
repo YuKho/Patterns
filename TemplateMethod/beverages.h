@@ -8,6 +8,7 @@ class Tea : public CaffeineBeverage
 public:
     void brew() const override;
     void addCondiments() const override;
+    bool customerWantsCondiments() const override;
 };
 
 class Coffee : public CaffeineBeverage
