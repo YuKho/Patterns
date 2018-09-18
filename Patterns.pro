@@ -24,7 +24,10 @@ SOURCES += \
     Facade/hometheaterfacade.cpp \
     Facade/electronics.cpp \
     TemplateMethod/caffeinebeverage.cpp \
-    TemplateMethod/beverages.cpp
+    TemplateMethod/beverages.cpp \
+    Iterator/dinermenu.cpp \
+    Iterator/menuitem.cpp \
+    Iterator/dinermenuiterator.cpp
 
 HEADERS += \
     patterntester.h \
@@ -58,4 +61,9 @@ HEADERS += \
     Facade/hometheaterfacade.h \
     Facade/electronics.h \
     TemplateMethod/caffeinebeverage.h \
-    TemplateMethod/beverages.h
+    TemplateMethod/beverages.h \
+    Iterator/dinermenu.h \
+    Iterator/menu.h \
+    Iterator/iterator.h \
+    Iterator/menuitem.h \
+    Iterator/dinermenuiterator.h

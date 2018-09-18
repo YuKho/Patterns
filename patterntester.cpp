@@ -73,6 +73,10 @@ void PatternTester::testPattern(Pattern pattern)
     case Pattern::TemplateMethod:
         testTemplateMethod();
         break;
+
+    case Pattern::Iterator:
+        testIterator();
+        break;
     }
 
     prinPostInfo(pattern);
@@ -336,6 +340,11 @@ void PatternTester::testTemplateMethod()
     coffee->prepareRecipe();
 }
 
+void PatternTester::testIterator()
+{
+
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -395,6 +404,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::TemplateMethod:
         return "TemplateMethod";
+
+    case Pattern::Iterator:
+        return "Iterator";
     }
 
     return "No name";
