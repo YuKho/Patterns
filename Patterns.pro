@@ -27,7 +27,10 @@ SOURCES += \
     TemplateMethod/beverages.cpp \
     Iterator/dinermenu.cpp \
     Iterator/menuitem.cpp \
-    Iterator/dinermenuiterator.cpp
+    Iterator/dinermenuiterator.cpp \
+    Iterator/pancakehousemenu.cpp \
+    Iterator/pancakehousemenuiterator.cpp \
+    Iterator/waitress.cpp
 
 HEADERS += \
     patterntester.h \
@@ -66,4 +69,7 @@ HEADERS += \
     Iterator/menu.h \
     Iterator/iterator.h \
     Iterator/menuitem.h \
-    Iterator/dinermenuiterator.h
+    Iterator/dinermenuiterator.h \
+    Iterator/pancakehousemenu.h \
+    Iterator/pancakehousemenuiterator.h \
+    Iterator/waitress.h
