@@ -27,6 +27,10 @@
 
 #include "TemplateMethod/beverages.h"
 
+#include "Iterator/waitress.h"
+#include "Iterator/dinermenu.h"
+#include "Iterator/pancakehousemenu.h"
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -342,7 +346,16 @@ void PatternTester::testTemplateMethod()
 
 void PatternTester::testIterator()
 {
+    std::initializer_list<std::shared_ptr<Menu>> list = {std::make_shared<DinerMenu>(),
+                                                         std::make_shared<PancakeHouseMenu>()};
 
+    auto waitress = std::make_unique<Waitress>(list);
+
+    waitress->printMenu();
+    std::cout << std::endl;
+
+    waitress->printVegetarianMenu();
+    std::cout << std::endl;
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)
