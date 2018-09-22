@@ -13,14 +13,14 @@ public:
     DinerMenu();
     void addItem(std::string name, std::string description, bool vegetarian, double price);
 
-    Iterator *createIterator() const override;
+    std::unique_ptr<Iterator> createIterator() const override;
     ~DinerMenu() override;
 
 private:
-    static const size_t MAX_ITEMS = 6;
+    static const size_t MAX_ITEMS;
 
     size_t _numberOfItems = 0;
-    MenuItem **_menuItems = nullptr;
+    MenuItem *_menuItems = nullptr;
 };
 
 #endif // DINERMENU_H
