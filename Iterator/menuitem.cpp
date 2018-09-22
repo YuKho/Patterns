@@ -29,5 +29,5 @@ bool MenuItem::isVegetarian() const
 
 std::string MenuItem::toString() const
 {
-    return _name + ", $" + std::to_string(_price) + "\n   " + _description;
+    return _name + ", $" + std::to_string(_price) + " --- [" + _description + "]";
 }

@@ -6,6 +6,7 @@
 class MenuItem
 {
 public:
+    MenuItem() = default;
     MenuItem(std::string name, std::string description, bool vegetarian, double price);
     std::string getName() const;
     std::string getDescription() const;
@@ -16,8 +17,8 @@ public:
 private:
     std::string _name;
     std::string _description;
-    bool _vegetarian;
-    double _price;
+    bool _vegetarian = false;
+    double _price = 0.0;
 };
 
 #endif // MENUITEM_H
