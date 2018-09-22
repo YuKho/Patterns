@@ -1,6 +1,6 @@
 #include "dinermenuiterator.h"
 
-DinerMenuIterator::DinerMenuIterator(MenuItem **items, size_t size)
+DinerMenuIterator::DinerMenuIterator(MenuItem *items, size_t size)
     : _items(items), _size(size)
 {
 }
@@ -12,6 +12,5 @@ bool DinerMenuIterator::hasNext() const
 
 MenuItem DinerMenuIterator::next()
 {
-    MenuItem *item = _items[_position++];
-    return *item;
+    return _items[_position++];
 }
