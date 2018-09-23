@@ -81,6 +81,10 @@ void PatternTester::testPattern(Pattern pattern)
     case Pattern::Iterator:
         testIterator();
         break;
+
+    case Pattern::Composite:
+        testComposite();
+        break;
     }
 
     prinPostInfo(pattern);
@@ -358,6 +362,11 @@ void PatternTester::testIterator()
     std::cout << std::endl;
 }
 
+void PatternTester::testComposite()
+{
+
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -420,6 +429,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Iterator:
         return "Iterator";
+
+    case Pattern::Composite:
+        return "Composite";
     }
 
     return "No name";

@@ -13,6 +13,7 @@ int main()
     PatternTester::testPattern(Pattern::Facade);
     PatternTester::testPattern(Pattern::TemplateMethod);
     PatternTester::testPattern(Pattern::Iterator);
+    PatternTester::testPattern(Pattern::Composite);
 
     std::cout << "All tests were finished." << std::endl;
 }
