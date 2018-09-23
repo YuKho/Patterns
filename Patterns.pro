@@ -30,7 +30,10 @@ SOURCES += \
     Iterator/dinermenuiterator.cpp \
     Iterator/pancakehousemenu.cpp \
     Iterator/pancakehousemenuiterator.cpp \
-    Iterator/waitress.cpp
+    Iterator/waitress.cpp \
+    Composite/compositemenu.cpp \
+    Composite/compositemenuitem.cpp \
+    Composite/compositewaitress.cpp
 
 HEADERS += \
     patterntester.h \
@@ -72,4 +75,8 @@ HEADERS += \
     Iterator/dinermenuiterator.h \
     Iterator/pancakehousemenu.h \
     Iterator/pancakehousemenuiterator.h \
-    Iterator/waitress.h
+    Iterator/waitress.h \
+    Composite/menucomponent.h \
+    Composite/compositemenu.h \
+    Composite/compositemenuitem.h \
+    Composite/compositewaitress.h
