@@ -12,3 +12,4 @@ This project was created to show the simple examples of most common code pattern
 * Command
 * Facade
 * Template Method
+* Iterator
