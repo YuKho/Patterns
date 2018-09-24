@@ -49,7 +49,7 @@ void CompositeMenuItem::print() const
 {
     std::cout << "  " + getName();
     if (isVegetarian())
-        std::cout << " (v)" << std::endl;
+        std::cout << " (v)";
 
     std::cout << ", " << getPrice() << "     -- " << getDescription() << std::endl;
 }

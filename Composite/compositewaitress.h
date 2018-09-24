@@ -9,7 +9,7 @@ class CompositeWaitress final
 {
 public:
     explicit CompositeWaitress(std::shared_ptr<MenuComponent> allMenus);
-    void print() const;
+    void printMenu() const;
 
 private:
     std::shared_ptr<MenuComponent> _allMenus;

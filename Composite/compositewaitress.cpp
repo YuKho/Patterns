@@ -7,7 +7,7 @@ CompositeWaitress::CompositeWaitress(std::shared_ptr<MenuComponent> allMenus)
 {
 }
 
-void CompositeWaitress::print() const
+void CompositeWaitress::printMenu() const
 {
     _allMenus->print();
 }
