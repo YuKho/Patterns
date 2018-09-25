@@ -368,65 +368,7 @@ void PatternTester::testIterator()
 
 void PatternTester::testComposite()
 {
-    auto pancakeHouseMenu = std::make_shared<CompositeMenu>("PANCAKE HOUSE MENU", "Breakfast");
-    auto dinerMenu = std::make_shared<CompositeMenu>("DINER MENU", "Lunch");
-    auto cafeMenu = std::make_shared<CompositeMenu>("CAFE MENU", "Dinner");
-    auto dessertMenu = std::make_shared<CompositeMenu>("DESSERT MENU", "Dessert of course!");
-    auto coffeeMenu = std::make_shared<CompositeMenu>("COFFEE MENU", "Stuff to go with your afternoon coffee");
-
-    auto allMenus = std::make_shared<CompositeMenu>("ALL MENUS", "All menus combined");
-
-    allMenus->add(pancakeHouseMenu);
-    allMenus->add(dinerMenu);
-    allMenus->add(cafeMenu);
-
-    pancakeHouseMenu->add(std::make_shared<CompositeMenuItem>("K&B's Pancake Breakfast",
-                          "Pancakes with scrambled eggs, and toast", true, 2.99));
-    pancakeHouseMenu->add(std::make_shared<CompositeMenuItem>("Regular Pancake Breakfast",
-                          "Pancakes with fried eggs, sausage", false, 2.99));
-    pancakeHouseMenu->add(std::make_shared<CompositeMenuItem>("Blueberry Pancakes",
-                          "Pancakes made with fresh blueberries, and blueberry syrup", true, 3.49));
-    pancakeHouseMenu->add(std::make_shared<CompositeMenuItem>("Waffles",
-                          "Waffles, with your choice of blueberries or strawberries", true, 3.59));
-
-    dinerMenu->add(std::make_shared<CompositeMenuItem>("Vegetarian BLT",
-                   "(Fakin') Bacon with lettuce & tomato on whole wheat", true, 2.99));
-    dinerMenu->add(std::make_shared<CompositeMenuItem>("BLT",
-                  "Bacon with lettuce & tomato on whole wheat", false, 2.99));
-    dinerMenu->add(std::make_shared<CompositeMenuItem>("Soup of the day",
-                   "A bowl of the soup of the day, with a side of potato salad", false, 3.29));
-    dinerMenu->add(std::make_shared<CompositeMenuItem>("Hotdog",
-                   "A hot dog, with saurkraut, relish, onions, topped with cheese", false, 3.05));
-    dinerMenu->add(std::make_shared<CompositeMenuItem>("Steamed Veggies and Brown Rice",
-                   "Steamed vegetables over brown rice", true, 3.99));
-    dinerMenu->add(std::make_shared<CompositeMenuItem>("Pasta",
-                   "Spaghetti with Marinara Sauce, and a slice of sourdough bread", true, 3.89));
-
-    dinerMenu->add(dessertMenu);
-
-    dessertMenu->add(std::make_shared<CompositeMenuItem>("Apple Pie",
-                     "Apple pie with a flakey crust, topped with vanilla icecream", true, 1.59));
-    dessertMenu->add(std::make_shared<CompositeMenuItem>("Cheesecake",
-                     "Creamy New York cheesecake, with a chocolate graham crust", true, 1.99));
-    dessertMenu->add(std::make_shared<CompositeMenuItem>("Sorbet",
-                     "A scoop of raspberry and a scoop of lime", true, 1.89));
-    cafeMenu->add(std::make_shared<CompositeMenuItem>("Veggie Burger and Air Fries",
-                  "Veggie burger on a whole wheat bun, lettuce, tomato, and fries", true, 3.99));
-    cafeMenu->add(std::make_shared<CompositeMenuItem>("Soup of the day",
-                  "A cup of the soup of the day, with a side salad", false, 3.69));
-    cafeMenu->add(std::make_shared<CompositeMenuItem>("Burrito",
-                  "A large burrito, with whole pinto beans, salsa, guacamole", true, 4.29));
-
-    cafeMenu->add(coffeeMenu);
-
-    coffeeMenu->add(std::make_shared<CompositeMenuItem>("Coffee Cake",
-                    "Crumbly cake topped with cinnamon and walnuts", true, 1.59));
-    coffeeMenu->add(std::make_shared<CompositeMenuItem>("Bagel",
-                    "Flavors include sesame, poppyseed, cinnamon raisin, pumpkin", false, 0.69));
-    coffeeMenu->add(std::make_shared<CompositeMenuItem>("Biscotti",
-                     "Three almond or hazelnut biscotti cookies", true, 0.89));
-
-    auto waitress = std::make_unique<CompositeWaitress>(allMenus);
+    auto waitress = std::make_unique<Composite::Waitress>(Composite::Waitress::createMenu());
     waitress->printMenu();
 }
 

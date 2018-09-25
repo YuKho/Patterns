@@ -4,23 +4,27 @@
 #include "menucomponent.h"
 #include <vector>
 
-class CompositeMenu : public MenuComponent
+namespace Composite
+{
+
+class Menu : public MenuComponent
 {
 public:
-    CompositeMenu(std::string name, std::string description);
-    void add(std::shared_ptr<MenuComponent> menuComponent) override;
-    void remove(const std::shared_ptr<MenuComponent> &menuComponent) override;
-    std::shared_ptr<MenuComponent> getChild(size_t index) override;
-    std::string getName() const override;
-    std::string getDescription() const override;
-    double getPrice() const override;
-    bool isVegetarian() const override;
+    using MenuComponent::MenuComponent;
+
+    void add(std::shared_ptr<MenuComponent> menuComponent);
+    void remove(const std::shared_ptr<MenuComponent> &menuComponent);
+    std::shared_ptr<Composite::MenuComponent> getChild(size_t index);
+
     void print() const override;
+
+    Menu *getMenu() override;
+    const Menu *getMenu() const override;
 
 private:
     std::vector<std::shared_ptr<MenuComponent>> _menuComponents;
-    std::string _name;
-    std::string _description;
 };
+
+} // end namespace Composite
 
 #endif // COMPOSITEMENU_H

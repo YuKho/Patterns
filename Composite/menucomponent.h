@@ -4,20 +4,39 @@
 #include <memory>
 #include <string>
 #include <cstddef>
+#include <utility>
+
+namespace Composite
+{
+
+class Menu;
+class MenuItem;
 
 class MenuComponent
 {
 public:
+    MenuComponent(std::string name, std::string description)
+        : _name(std::move(name)), _description(std::move(description))
+    {}
+
     virtual ~MenuComponent() = default;
 
-    virtual void add(std::shared_ptr<MenuComponent> menuComponent) = 0;
-    virtual void remove(const std::shared_ptr<MenuComponent> &menuComponent) = 0;
-    virtual std::shared_ptr<MenuComponent> getChild(size_t index) = 0;
-    virtual std::string getName() const = 0;
-    virtual std::string getDescription() const = 0;
-    virtual double getPrice() const = 0;
-    virtual bool isVegetarian() const = 0;
+    std::string getName() const { return _name; }
+    std::string getDescription() const { return _description; }
+
     virtual void print() const = 0;
+
+    virtual Menu *getMenu() { return nullptr; }
+    virtual const Menu *getMenu() const { return nullptr; }
+
+    virtual MenuItem *getMenuItem() { return nullptr; }
+    virtual const MenuItem *getMenuItem() const { return nullptr; }
+
+protected:
+    std::string _name;
+    std::string _description;
 };
+
+} // end namespace Composite
 
 #endif // MENUCOMPONENT_H
