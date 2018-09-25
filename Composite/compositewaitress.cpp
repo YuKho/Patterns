@@ -3,6 +3,7 @@
 #include "compositemenu.h"
 #include "compositemenuitem.h"
 #include <utility>
+#include <iostream>
 
 Composite::Waitress::Waitress(std::shared_ptr<MenuComponent> allMenus)
     : _allMenus(std::move(allMenus))
@@ -12,6 +13,9 @@ Composite::Waitress::Waitress(std::shared_ptr<MenuComponent> allMenus)
 void Composite::Waitress::printMenu() const
 {
     _allMenus->print();
+
+    std::cout << "\nTotal count of main menus: " << menuCount() << std::endl;
+    std::cout << "Total count of sub menus: " << subMenuCount() << std::endl;
 }
 
 void Composite::Waitress::addMenu(const std::shared_ptr<MenuComponent> &menuComponent)
@@ -32,6 +36,22 @@ std::shared_ptr<Composite::MenuComponent> Composite::Waitress::getMenu(size_t in
         return _allMenus->getMenu()->getChild(index);
 
     return nullptr;
+}
+
+size_t Composite::Waitress::menuCount() const
+{
+    if (_allMenus->getMenu())
+        return _allMenus->getMenu()->menuCount();
+
+    return 0;
+}
+
+size_t Composite::Waitress::subMenuCount() const
+{
+    if (_allMenus->getMenu())
+        return _allMenus->getMenu()->subMenuCount();
+
+    return 0;
 }
 
 std::unique_ptr<Composite::MenuComponent> Composite::Waitress::createMenu()

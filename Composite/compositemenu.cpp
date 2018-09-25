@@ -17,7 +17,34 @@ void Composite::Menu::remove(const std::shared_ptr<MenuComponent> &menuComponent
 
 std::shared_ptr<Composite::MenuComponent> Composite::Menu::getChild(size_t index)
 {
+    if (index >= _menuComponents.size())
+        return nullptr;
+
     return _menuComponents[index];
+}
+
+size_t Composite::Menu::menuCount() const
+{
+    size_t count = 0;
+    for (const auto &component : _menuComponents)
+    {
+        if (component->getMenu())
+            ++count;
+    }
+
+    return count;
+}
+
+size_t Composite::Menu::subMenuCount() const
+{
+    size_t count = 1;
+    for (const auto &component : _menuComponents)
+    {
+        if (component->getMenu())
+            count += component->getMenu()->subMenuCount();
+    }
+
+    return count;
 }
 
 void Composite::Menu::print() const

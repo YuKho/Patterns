@@ -17,6 +17,8 @@ public:
     void addMenu(const std::shared_ptr<MenuComponent> &menuComponent);
     void removeMenu(const std::shared_ptr<MenuComponent> &menuComponent);
     std::shared_ptr<Composite::MenuComponent> getMenu(size_t index) const;
+    size_t menuCount() const;
+    size_t subMenuCount() const;
 
     static std::unique_ptr<Composite::MenuComponent> createMenu();
 
