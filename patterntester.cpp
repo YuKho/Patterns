@@ -31,6 +31,10 @@
 #include "Iterator/dinermenu.h"
 #include "Iterator/pancakehousemenu.h"
 
+#include "Composite/compositemenu.h"
+#include "Composite/compositemenuitem.h"
+#include "Composite/compositewaitress.h"
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -80,6 +84,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::Iterator:
         testIterator();
+        break;
+
+    case Pattern::Composite:
+        testComposite();
         break;
     }
 
@@ -358,6 +366,31 @@ void PatternTester::testIterator()
     std::cout << std::endl;
 }
 
+void PatternTester::testComposite()
+{
+    auto waitress = std::make_unique<Composite::Waitress>(Composite::Waitress::createMenu());
+    waitress->printMenu();
+
+    if (auto menu = waitress->getMenu(0))
+    {
+        std::cout << "\nThe first menu is: \n";
+        menu->print();
+    }
+
+    if (auto menu = waitress->getMenu(waitress->menuCount() - 1))
+    {
+        std::cout << "\nThe last menu is: \n";
+        menu->print();
+    }
+
+    if (auto menu = waitress->getMenu(waitress->menuCount() - 1))
+    {
+        waitress->removeMenu(menu);
+        std::cout << "\nLast menu removed.\n";
+        waitress->printMenu();
+    }
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -420,6 +453,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Iterator:
         return "Iterator";
+
+    case Pattern::Composite:
+        return "Composite";
     }
 
     return "No name";

@@ -4,7 +4,7 @@
 #include <string>
 
 enum class Pattern { Strategy, Observer, Decorator, Factory, Singleton, Command, Adapter, Facade,
-                     TemplateMethod, Iterator };
+                     TemplateMethod, Iterator, Composite };
 
 class PatternTester
 {
@@ -22,6 +22,7 @@ private:
     static void testFacade();
     static void testTemplateMethod();
     static void testIterator();
+    static void testComposite();
 
     static void prinPreInfo(Pattern pattern);
     static void prinPostInfo(Pattern pattern);
