@@ -370,6 +370,25 @@ void PatternTester::testComposite()
 {
     auto waitress = std::make_unique<Composite::Waitress>(Composite::Waitress::createMenu());
     waitress->printMenu();
+
+    if (auto menu = waitress->getMenu(0))
+    {
+        std::cout << "\nThe first menu is: \n";
+        menu->print();
+    }
+
+    if (auto menu = waitress->getMenu(waitress->menuCount() - 1))
+    {
+        std::cout << "\nThe last menu is: \n";
+        menu->print();
+    }
+
+    if (auto menu = waitress->getMenu(waitress->menuCount() - 1))
+    {
+        waitress->removeMenu(menu);
+        std::cout << "\nLast menu removed.\n";
+        waitress->printMenu();
+    }
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)
