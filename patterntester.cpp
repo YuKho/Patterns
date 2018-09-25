@@ -31,8 +31,7 @@
 #include "Iterator/dinermenu.h"
 #include "Iterator/pancakehousemenu.h"
 
-#include "Composite/compositemenu.h"
-#include "Composite/compositemenuitem.h"
+#include "Composite/menucomponent.h"
 #include "Composite/compositewaitress.h"
 
 #include <iostream>
