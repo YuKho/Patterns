@@ -88,6 +88,10 @@ void PatternTester::testPattern(Pattern pattern)
     case Pattern::Composite:
         testComposite();
         break;
+
+    case Pattern::State:
+        testState();
+        break;
     }
 
     prinPostInfo(pattern);
@@ -455,6 +459,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Composite:
         return "Composite";
+
+    case Pattern::State:
+        return "State";
     }
 
     return "No name";

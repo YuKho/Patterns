@@ -79,4 +79,5 @@ HEADERS += \
     Composite/menucomponent.h \
     Composite/compositemenu.h \
     Composite/compositemenuitem.h \
-    Composite/compositewaitress.h
+    Composite/compositewaitress.h \
+    State/state.h
