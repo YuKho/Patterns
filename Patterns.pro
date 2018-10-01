@@ -33,7 +33,12 @@ SOURCES += \
     Iterator/waitress.cpp \
     Composite/compositemenu.cpp \
     Composite/compositemenuitem.cpp \
-    Composite/compositewaitress.cpp
+    Composite/compositewaitress.cpp \
+    State/noquarterstate.cpp \
+    State/hasquarterstate.cpp \
+    State/soldstate.cpp \
+    State/soldoutstate.cpp \
+    State/winnerstate.cpp \
     State/state.cpp
 
 HEADERS += \
@@ -81,4 +86,9 @@ HEADERS += \
     Composite/compositemenu.h \
     Composite/compositemenuitem.h \
     Composite/compositewaitress.h \
-    State/state.h
+    State/state.h \
+    State/noquarterstate.h \
+    State/hasquarterstate.h \
+    State/soldstate.h \
+    State/soldoutstate.h \
+    State/winnerstate.h \
