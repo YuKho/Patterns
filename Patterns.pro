@@ -34,6 +34,7 @@ SOURCES += \
     Composite/compositemenu.cpp \
     Composite/compositemenuitem.cpp \
     Composite/compositewaitress.cpp
+    State/state.cpp
 
 HEADERS += \
     patterntester.h \
