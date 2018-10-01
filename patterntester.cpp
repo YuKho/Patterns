@@ -34,6 +34,8 @@
 #include "Composite/menucomponent.h"
 #include "Composite/compositewaitress.h"
 
+#include "State/gumballmachine.h"
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -392,6 +394,48 @@ void PatternTester::testComposite()
         std::cout << "\nLast menu removed.\n";
         waitress->printMenu();
     }
+}
+
+void PatternTester::testState()
+{
+    const auto gumballMachine = std::make_unique<GumballMachine>(10);
+
+    std::cout << *gumballMachine << std::endl;
+
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+
+    std::cout << *gumballMachine << std::endl;
+
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+
+    std::cout << *gumballMachine << std::endl;
+
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+
+    std::cout << *gumballMachine << std::endl;
+
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+
+    std::cout << *gumballMachine << std::endl;
+
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+
+    std::cout << *gumballMachine << std::endl;
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)
