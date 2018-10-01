@@ -39,6 +39,7 @@ SOURCES += \
     State/soldstate.cpp \
     State/soldoutstate.cpp \
     State/winnerstate.cpp \
+    State/gumballmachine.cpp \
     State/state.cpp
 
 HEADERS += \
@@ -92,3 +93,4 @@ HEADERS += \
     State/soldstate.h \
     State/soldoutstate.h \
     State/winnerstate.h \
+    State/gumballmachine.h
