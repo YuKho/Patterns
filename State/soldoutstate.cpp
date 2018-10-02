@@ -4,34 +4,28 @@
 
 void SoldOutState::insertQuarter()
 {
-    puts("Please wait, we're already giving you a gumball");
+    puts("You can't insert a quarter, the machine is sold out");
 }
 
 void SoldOutState::ejectQuarter()
 {
-    puts("Sorry, you already turned the crank");
+    puts("You can't eject, you haven't inserted a quarter yet");
 }
 
 void SoldOutState::turnCrank()
 {
-    puts("Turning twice doesn't get you another gumball!");
+    puts("You turned, but there are no gumballs");
 }
 
 void SoldOutState::dispense()
 {
-    _gumballMachine->releaseBall();
-    if (_gumballMachine->getCount() > 0)
-    {
-        _gumballMachine->setState(_gumballMachine->getState(GumballMachine::StateType::NoQuarter));
-    }
-    else
-    {
-        puts("Oops, out of gumballs!");
-        _gumballMachine->setState(_gumballMachine->getState(GumballMachine::StateType::SoldOut));
-    }
+    puts("No gumball dispensed");
 }
 
-void SoldOutState::refill() {}
+void SoldOutState::refill()
+{
+    _gumballMachine->setState(_gumballMachine->getState(GumballMachine::StateType::NoQuarter));
+}
 
 std::ostream &SoldOutState::print(std::ostream &os) const
 {

@@ -43,11 +43,25 @@ void GumballMachine::setState(std::shared_ptr<State> state)
     _state = std::move(state);
 }
 
-void GumballMachine::releaseBall()
+bool GumballMachine::releaseBalls(size_t count)
 {
-    puts("A gumball comes rolling out the slot...");
-    if (_count != 0)
-        --_count;
+    if (_count < count)
+    {
+        while (isEmpty())
+            releaseBall();
+
+        return false;
+    }
+
+    for (size_t i = 0; i < count; ++i)
+        releaseBall();
+
+    return true;
+}
+
+bool GumballMachine::isEmpty() const
+{
+    return _count == 0;
 }
 
 std::shared_ptr<State> GumballMachine::getState(GumballMachine::StateType state)
@@ -103,8 +117,17 @@ std::ostream &GumballMachine::print(std::ostream &os) const
     result.append("\n");
     std::ostringstream oss;
     oss << *_state;
-    result.append(std::string{"Machine is "} + oss.str() + "\n");
+    result.append(std::string{"Machine is \'"} + oss.str() + "\'\n");
     return os << result;
+}
+
+void GumballMachine::releaseBall()
+{
+    if (_count != 0)
+    {
+        --_count;
+        puts("A gumball comes rolling out the slot...");
+    }
 }
 
 std::ostream &operator <<(std::ostream &os, const GumballMachine &machine)

@@ -399,43 +399,18 @@ void PatternTester::testComposite()
 void PatternTester::testState()
 {
     const auto gumballMachine = std::make_unique<GumballMachine>(10);
-
     std::cout << *gumballMachine << std::endl;
 
-    gumballMachine->insertQuarter();
-    gumballMachine->turnCrank();
-    gumballMachine->insertQuarter();
-    gumballMachine->turnCrank();
+    testGumballMachine(gumballMachine.get());
+    testGumballMachine(gumballMachine.get());
+    testGumballMachine(gumballMachine.get());
+    testGumballMachine(gumballMachine.get());
+    testGumballMachine(gumballMachine.get());
 
-    std::cout << *gumballMachine << std::endl;
+    if (gumballMachine->getCount() == 0)
+        gumballMachine->refill(10);
 
-    gumballMachine->insertQuarter();
-    gumballMachine->turnCrank();
-    gumballMachine->insertQuarter();
-    gumballMachine->turnCrank();
-
-    std::cout << *gumballMachine << std::endl;
-
-    gumballMachine->insertQuarter();
-    gumballMachine->turnCrank();
-    gumballMachine->insertQuarter();
-    gumballMachine->turnCrank();
-
-    std::cout << *gumballMachine << std::endl;
-
-    gumballMachine->insertQuarter();
-    gumballMachine->turnCrank();
-    gumballMachine->insertQuarter();
-    gumballMachine->turnCrank();
-
-    std::cout << *gumballMachine << std::endl;
-
-    gumballMachine->insertQuarter();
-    gumballMachine->turnCrank();
-    gumballMachine->insertQuarter();
-    gumballMachine->turnCrank();
-
-    std::cout << *gumballMachine << std::endl;
+    testGumballMachine(gumballMachine.get());
 }
 
 void PatternTester::prinPreInfo(Pattern pattern)
@@ -509,4 +484,14 @@ std::string PatternTester::patternName(Pattern pattern)
     }
 
     return "No name";
+}
+
+void PatternTester::testGumballMachine(const GumballMachine * const gumballMachine)
+{
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+    gumballMachine->insertQuarter();
+    gumballMachine->turnCrank();
+
+    std::cout << *gumballMachine << std::endl;
 }

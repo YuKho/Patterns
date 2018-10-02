@@ -12,7 +12,6 @@ public:
     void ejectQuarter() override;
     void turnCrank() override;
     void dispense() override;
-    void refill() override;
 
     std::ostream &print(std::ostream &os) const override;
 };

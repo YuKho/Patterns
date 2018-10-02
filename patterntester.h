@@ -3,6 +3,8 @@
 
 #include <string>
 
+class GumballMachine;
+
 enum class Pattern { Strategy, Observer, Decorator, Factory, Singleton, Command, Adapter, Facade,
                      TemplateMethod, Iterator, Composite, State };
 
@@ -29,6 +31,8 @@ private:
     static void prinPostInfo(Pattern pattern);
     static std::string decorateMessage(std::string message, char decorChar = '#');
     static std::string patternName(Pattern pattern);
+
+    static void testGumballMachine(const GumballMachine *const gumballMachine);
 };
 
 #endif // PATTERNTESTER_H

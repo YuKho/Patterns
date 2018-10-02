@@ -18,17 +18,20 @@ public:
     void insertQuarter() const;
     void ejectQuarter() const;
     void turnCrank() const;
-    void releaseBall();
 
     void setState(std::shared_ptr<State> state);
     std::shared_ptr<State> getState(StateType state);
     std::shared_ptr<State> getCurrentState() const;
 
     size_t getCount() const;
+    bool releaseBalls(size_t count);
+    bool isEmpty() const;
+    void refill(size_t count);
+
     std::ostream &print(std::ostream &os) const;
 
 private:
-    void refill(size_t count);
+    void releaseBall();
 
 private:
     std::shared_ptr<State> _soldOutState;

@@ -9,7 +9,7 @@ void WinnerState::insertQuarter()
 
 void WinnerState::ejectQuarter()
 {
-    puts("Please wait, we're already giving you a Gumball");
+    puts("Sorry, you already turned the crank");
 }
 
 void WinnerState::turnCrank()
@@ -19,28 +19,16 @@ void WinnerState::turnCrank()
 
 void WinnerState::dispense()
 {
-    _gumballMachine->releaseBall();
-    if (_gumballMachine->getCount() == 0)
-    {
-        _gumballMachine->setState(_gumballMachine->getState(GumballMachine::StateType::SoldOut));
-    }
-    else
-    {
-        _gumballMachine->releaseBall();
-        puts("YOU'RE A WINNER! You got two gumballs for your quarter");
-        if (_gumballMachine->getCount() > 0)
-        {
-            _gumballMachine->setState(_gumballMachine->getState(GumballMachine::StateType::NoQuarter));
-        }
-        else
-        {
-            puts("Oops, out of gumballs!");
-            _gumballMachine->setState(_gumballMachine->getState(GumballMachine::StateType::SoldOut));
-        }
-    }
-}
+    const bool success = _gumballMachine->releaseBalls(2);
+    success ? puts("YOU'RE A WINNER! You have been got two gumballs for your quarter")
+            : puts("Oops, out of gumballs!");
 
-void WinnerState::refill() {}
+    const GumballMachine::StateType nextState = success && !_gumballMachine->isEmpty()
+            ? GumballMachine::StateType::NoQuarter
+            : GumballMachine::StateType::SoldOut;
+
+    _gumballMachine->setState(_gumballMachine->getState(nextState));
+}
 
 std::ostream &WinnerState::print(std::ostream &os) const
 {

@@ -23,8 +23,6 @@ void NoQuarterState::dispense()
     puts("You need to pay first");
 }
 
-void NoQuarterState::refill() { }
-
 std::ostream &NoQuarterState::print(std::ostream &os) const
 {
     return os << "waiting for quarter";

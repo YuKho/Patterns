@@ -33,8 +33,6 @@ void HasQuarterState::dispense()
     puts("No gumball dispensed");
 }
 
-void HasQuarterState::refill() {}
-
 std::ostream &HasQuarterState::print(std::ostream &os) const
 {
     return os << "waiting for turn of crank";

@@ -8,3 +8,7 @@ std::ostream &operator <<(std::ostream &os, const State &state)
 State::State(GumballMachine *gumballMachine) : _gumballMachine(gumballMachine)
 {
 }
+
+void State::refill()
+{
+}

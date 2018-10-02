@@ -14,7 +14,7 @@ public:
     virtual void ejectQuarter() = 0;
     virtual void turnCrank() = 0;
     virtual void dispense() = 0;
-    virtual void refill() = 0;
+    virtual void refill();
 
     virtual std::ostream &print(std::ostream &) const = 0;
 
