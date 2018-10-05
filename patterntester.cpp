@@ -486,7 +486,7 @@ std::string PatternTester::patternName(Pattern pattern)
     return "No name";
 }
 
-void PatternTester::testGumballMachine(const GumballMachine * const gumballMachine)
+void PatternTester::testGumballMachine(const GumballMachine *const gumballMachine)
 {
     gumballMachine->insertQuarter();
     gumballMachine->turnCrank();

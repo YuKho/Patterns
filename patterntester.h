@@ -32,7 +32,7 @@ private:
     static std::string decorateMessage(std::string message, char decorChar = '#');
     static std::string patternName(Pattern pattern);
 
-    static void testGumballMachine(const GumballMachine *const gumballMachine);
+    static void testGumballMachine(const GumballMachine *gumballMachine);
 };
 
 #endif // PATTERNTESTER_H
