@@ -5,14 +5,17 @@
 #include <string>
 #include <vector>
 
-class SimplePizza : public AbstractPizza
+namespace SimpleFactory
+{
+
+class Pizza : public AbstractPizza
 {
 public:
     void prepare() override;
     std::ostream& print(std::ostream &os) const override;
 
 protected:
-    SimplePizza(std::string name, std::string dough, std::string sauce);
+    Pizza(std::string name, std::string dough, std::string sauce);
     void addTopping(std::string top);
 
 protected:
@@ -21,29 +24,31 @@ protected:
     std::vector<std::string> _toppings;
 };
 
-class SimpleCheesePizza : public SimplePizza
+class CheesePizza : public Pizza
 {
 public:
-    SimpleCheesePizza();
+    CheesePizza();
 };
 
-class SimplePepperoniPizza : public SimplePizza
+class PepperoniPizza : public Pizza
 {
 public:
-    SimplePepperoniPizza();
+    PepperoniPizza();
 };
 
-class SimpleClamPizza : public SimplePizza
+class ClamPizza : public Pizza
 {
 public:
-    SimpleClamPizza();
+    ClamPizza();
 };
 
-class SimpleVeggiePizza : public SimplePizza
+class VeggiePizza : public Pizza
 {
 public:
-    SimpleVeggiePizza();
+    VeggiePizza();
     void cut() const override;
 };
+
+} // end namespace SimpleFactory
 
 #endif // SIMPLEPIZZA_H

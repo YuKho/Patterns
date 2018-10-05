@@ -2,7 +2,7 @@
 #include <iostream>
 #include <utility>
 
-void SimplePizza::prepare()
+void SimpleFactory::Pizza::prepare()
 {
     std::cout << "Preparing " << name() << "\n";
     std::cout << "Tossing dough...,\t";
@@ -16,7 +16,7 @@ void SimplePizza::prepare()
     }
 }
 
-std::ostream &SimplePizza::print(std::ostream &os) const
+std::ostream &SimpleFactory::Pizza::print(std::ostream &os) const
 {
     os << "---- " << name() << " ----\n"
        << _dough << "\n"
@@ -32,36 +32,36 @@ std::ostream &SimplePizza::print(std::ostream &os) const
     return os;
 }
 
-SimplePizza::SimplePizza(std::string name, std::string dough, std::string sauce)
+SimpleFactory::Pizza::Pizza(std::string name, std::string dough, std::string sauce)
     : AbstractPizza(std::move(name)), _dough(std::move(dough)), _sauce(std::move(sauce))
 {
 }
 
-void SimplePizza::addTopping(std::string top)
+void SimpleFactory::Pizza::addTopping(std::string top)
 {
     _toppings.push_back(std::move(top));
 }
 
-SimpleCheesePizza::SimpleCheesePizza() : SimplePizza("Cheese Pizza", "Regular Crust", "Marinara Pizza Sauce")
+SimpleFactory::CheesePizza::CheesePizza() : Pizza("Cheese Pizza", "Regular Crust", "Marinara Pizza Sauce")
 {
     addTopping("Fresh Mozzarella");
     addTopping("Parmesan");
 }
 
-SimplePepperoniPizza::SimplePepperoniPizza() : SimplePizza("Pepperoni Pizza", "Crust", "Marinara Sauce")
+SimpleFactory::PepperoniPizza::PepperoniPizza() : Pizza("Pepperoni Pizza", "Crust", "Marinara Sauce")
 {
     addTopping("Sliced Pepperoni");
     addTopping("Sliced Onion");
     addTopping("Grated parmesan cheese");
 }
 
-SimpleClamPizza::SimpleClamPizza() : SimplePizza("Clam Pizza", "Thin Crust", "White Garlic Sauce")
+SimpleFactory::ClamPizza::ClamPizza() : Pizza("Clam Pizza", "Thin Crust", "White Garlic Sauce")
 {
     addTopping("Clams");
     addTopping("Grated parmesan cheese");
 }
 
-SimpleVeggiePizza::SimpleVeggiePizza() : SimplePizza("Veggie Pizza", "Crust", "Marinara Sauce")
+SimpleFactory::VeggiePizza::VeggiePizza() : Pizza("Veggie Pizza", "Crust", "Marinara Sauce")
 {
     addTopping("Shredded mozzarella");
     addTopping("Grated parmesan");
@@ -71,7 +71,7 @@ SimpleVeggiePizza::SimpleVeggiePizza() : SimplePizza("Veggie Pizza", "Crust", "M
     addTopping("Sliced black olives");
 }
 
-void SimpleVeggiePizza::cut() const
+void SimpleFactory::VeggiePizza::cut() const
 {
     std::cout << "Cut the \'" << name() << "\' into triangle form" << std::endl;
 }

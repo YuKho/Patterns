@@ -49,7 +49,6 @@ HEADERS += \
     Observer/weatherstation.h \
     Observer/weatherobservers.h \
     Decorator/beverage.h \
-    Factory/SimpleFactory/simplepizzafactory.h \
     Factory/pizza.h \
     Factory/SimpleFactory/simplepizza.h \
     Factory/SimpleFactory/simplepizzastore.h \
@@ -93,4 +92,5 @@ HEADERS += \
     State/soldstate.h \
     State/soldoutstate.h \
     State/winnerstate.h \
-    State/gumballmachine.h
+    State/gumballmachine.h \
+    Factory/SimpleFactory/pizzafactory.h

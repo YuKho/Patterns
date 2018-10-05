@@ -158,9 +158,9 @@ void PatternTester::testDecorator()
 void PatternTester::testFactory()
 {
     std::cout << decorateMessage("Simple Factory", '-') << std::endl;
-    std::vector<std::unique_ptr<SimplePizza>> pizzas;
-    pizzas.push_back(SimplePizzaStore::orderPizza("cheese"));
-    pizzas.push_back(SimplePizzaStore::orderPizza("veggie"));
+    std::vector<std::unique_ptr<SimpleFactory::Pizza>> pizzas;
+    pizzas.push_back(SimpleFactory::PizzaStore::orderPizza("cheese"));
+    pizzas.push_back(SimpleFactory::PizzaStore::orderPizza("veggie"));
     std::cout << "\nWe ordered: \n\n";
     for (const auto &pizza : pizzas)
         std::cout << pizza.get() << std::endl;

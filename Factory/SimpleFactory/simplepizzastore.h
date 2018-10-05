@@ -1,18 +1,21 @@
 #ifndef SIMPLEPIZZASTORE_H
 #define SIMPLEPIZZASTORE_H
 
-#include "simplepizzafactory.h"
+#include "pizzafactory.h"
 #include <memory>
 #include <string>
 
-class SimplePizza;
+namespace SimpleFactory
+{
 
-class SimplePizzaStore
+class Pizza;
+
+class PizzaStore
 {
 public:
-    static std::unique_ptr<SimplePizza> orderPizza(const std::string &type)
+    static std::unique_ptr<Pizza> orderPizza(const std::string &type)
     {
-        auto pizza = SimplePizzaFactory::createPizza(type);
+        auto pizza = PizzaFactory::createPizza(type);
 
         pizza->prepare();
         pizza->bake();
@@ -22,5 +25,7 @@ public:
         return pizza;
     }
 };
+
+} // end namespace SimpleFactory
 
 #endif // SIMPLEPIZZASTORE_H
