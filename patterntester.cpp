@@ -36,6 +36,8 @@
 
 #include "State/gumballmachine.h"
 
+#include "Bridge/logger.h"
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -93,6 +95,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::State:
         testState();
+        break;
+
+    case Pattern::Bridge:
+        testBridge();
         break;
     }
 
@@ -413,6 +419,18 @@ void PatternTester::testState()
     testGumballMachine(gumballMachine.get());
 }
 
+void PatternTester::testBridge()
+{
+    std::unique_ptr<Logger> logger = std::make_unique<FileLogger>(Logger::Mode::MT, "log.txt");
+    logger->log("message");
+
+    logger = std::make_unique<FileLogger>(Logger::Mode::ST, "log.txt");
+    logger->log("message");
+
+    logger = std::make_unique<ConsoleLogger>(Logger::Mode::ST);
+    logger->log("message");
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -481,6 +499,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::State:
         return "State";
+
+    case Pattern::Bridge:
+        return "Bridge";
     }
 
     return "No name";

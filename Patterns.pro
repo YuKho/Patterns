@@ -40,7 +40,9 @@ SOURCES += \
     State/soldoutstate.cpp \
     State/winnerstate.cpp \
     State/gumballmachine.cpp \
-    State/state.cpp
+    State/state.cpp \
+    Bridge/logger.cpp \
+    Bridge/loggerimpl.cpp
 
 HEADERS += \
     patterntester.h \
@@ -93,4 +95,6 @@ HEADERS += \
     State/soldoutstate.h \
     State/winnerstate.h \
     State/gumballmachine.h \
-    Factory/SimpleFactory/pizzafactory.h
+    Factory/SimpleFactory/pizzafactory.h \
+    Bridge/logger.h \
+    Bridge/loggerimpl.h
