@@ -37,6 +37,9 @@
 #include "State/gumballmachine.h"
 
 #include "Bridge/logger.h"
+#include "Builder/director.h"
+#include "Builder/armybuilder.h"
+#include "Builder/army.h"
 
 #include <iostream>
 #include <iomanip>
@@ -99,6 +102,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::Bridge:
         testBridge();
+        break;
+
+    case Pattern::Builder:
+        testBuilder();
         break;
     }
 
@@ -431,6 +438,24 @@ void PatternTester::testBridge()
     logger->log("message");
 }
 
+void PatternTester::testBuilder()
+{
+    RomanArmyBuilder ra_builder;
+    CarthaginianArmyBuilder ca_builder;
+
+    const auto ra = Director::createExternalArmy(ra_builder);
+    const auto ca = Director::createExternalArmy(ca_builder);
+
+    ra->printArmyInfo();
+    std::cout << std::endl;
+    ca->printArmyInfo();
+
+    Director director;
+    director.createInternalArmy(ra_builder);
+    std::cout << std::endl;
+    director.printArmy();
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -502,6 +527,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Bridge:
         return "Bridge";
+
+    case Pattern::Builder:
+        return "Builder";
     }
 
     return "No name";

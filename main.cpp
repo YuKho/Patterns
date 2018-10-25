@@ -16,6 +16,7 @@ int main()
     PatternTester::testPattern(Pattern::Composite);
     PatternTester::testPattern(Pattern::State);
     PatternTester::testPattern(Pattern::Bridge);
+    PatternTester::testPattern(Pattern::Builder);
 
     std::cout << "All tests were finished." << std::endl;
 }

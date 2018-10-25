@@ -42,7 +42,10 @@ SOURCES += \
     State/gumballmachine.cpp \
     State/state.cpp \
     Bridge/logger.cpp \
-    Bridge/loggerimpl.cpp
+    Bridge/loggerimpl.cpp \
+    Builder/army.cpp \
+    Builder/armybuilder.cpp \
+    Builder/director.cpp
 
 HEADERS += \
     patterntester.h \
@@ -97,4 +100,8 @@ HEADERS += \
     State/gumballmachine.h \
     Factory/SimpleFactory/pizzafactory.h \
     Bridge/logger.h \
-    Bridge/loggerimpl.h
+    Bridge/loggerimpl.h \
+    Builder/units.h \
+    Builder/army.h \
+    Builder/armybuilder.h \
+    Builder/director.h
