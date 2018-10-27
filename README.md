@@ -17,3 +17,4 @@ This project was created to show the simple examples of most common code pattern
 * State
 * Bridge
 * Builder
+* Chain Of Responsibility

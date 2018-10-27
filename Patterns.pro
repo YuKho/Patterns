@@ -45,7 +45,8 @@ SOURCES += \
     Bridge/loggerimpl.cpp \
     Builder/army.cpp \
     Builder/armybuilder.cpp \
-    Builder/director.cpp
+    Builder/director.cpp \
+    ChainOfResponsibility/basehandler.cpp
 
 HEADERS += \
     patterntester.h \
@@ -104,4 +105,5 @@ HEADERS += \
     Builder/units.h \
     Builder/army.h \
     Builder/armybuilder.h \
-    Builder/director.h
+    Builder/director.h \
+    ChainOfResponsibility/basehandler.h

@@ -40,6 +40,7 @@
 #include "Builder/director.h"
 #include "Builder/armybuilder.h"
 #include "Builder/army.h"
+#include "ChainOfResponsibility/basehandler.h"
 
 #include <iostream>
 #include <iomanip>
@@ -106,6 +107,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::Builder:
         testBuilder();
+        break;
+
+    case Pattern::ChainOfResponsibility:
+        testChainOfResponsibility();
         break;
     }
 
@@ -456,6 +461,19 @@ void PatternTester::testBuilder()
     director.printArmy();
 }
 
+void PatternTester::testChainOfResponsibility()
+{
+    auto rootHandler = std::make_unique<FirstHandle>();
+    rootHandler->addHandler(std::make_unique<SecondHandle>());
+    rootHandler->addHandler(std::make_unique<ThirdHandle>());
+
+    for (const auto &data : {"third", "first", "second", "hello"})
+    {
+        rootHandler->handle(data);
+        std::cout << std::endl;
+    }
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -530,6 +548,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Builder:
         return "Builder";
+
+    case Pattern::ChainOfResponsibility:
+        return "Chain Of Responsibility";
     }
 
     return "No name";
