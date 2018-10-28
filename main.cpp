@@ -19,6 +19,7 @@ int main()
     PatternTester::testPattern(Pattern::Builder);
     PatternTester::testPattern(Pattern::Flyweight);
     PatternTester::testPattern(Pattern::ChainOfResponsibility);
+    PatternTester::testPattern(Pattern::Mediator);
 
     std::cout << "All tests were finished." << std::endl;
 }

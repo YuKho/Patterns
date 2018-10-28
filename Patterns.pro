@@ -49,7 +49,9 @@ SOURCES += \
     ChainOfResponsibility/basehandler.cpp \
     Flyweight/unitimagesfactory.cpp \
     Flyweight/image.cpp \
-    Flyweight/gameunits.cpp
+    Flyweight/gameunits.cpp \
+    Mediator/widget.cpp \
+    Mediator/fileselectiondialog.cpp
 
 HEADERS += \
     patterntester.h \
@@ -112,4 +114,6 @@ HEADERS += \
     ChainOfResponsibility/basehandler.h \
     Flyweight/image.h \
     Flyweight/unitimagesfactory.h \
-    Flyweight/gameunits.h
+    Flyweight/gameunits.h \
+    Mediator/widget.h \
+    Mediator/fileselectiondialog.h

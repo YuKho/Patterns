@@ -30,6 +30,7 @@
 #include "Builder/army.h"
 #include "ChainOfResponsibility/basehandler.h"
 #include "Flyweight/gameunits.h"
+#include "Mediator/fileselectiondialog.h"
 
 #include <iostream>
 #include <iomanip>
@@ -104,6 +105,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::ChainOfResponsibility:
         testChainOfResponsibility();
+        break;
+
+    case Pattern::Mediator:
+        testMediator();
         break;
     }
 
@@ -479,6 +484,13 @@ void PatternTester::testChainOfResponsibility()
     }
 }
 
+void PatternTester::testMediator()
+{
+    Mediator::FileSelectionDialog fileDialog;
+    for (size_t i = 0; i < 5; ++i)
+        fileDialog.handleEvent(i);
+}
+
 void PatternTester::prinPreInfo(Pattern pattern)
 {
     std::string message{patternName(pattern) + " pattern test start:"};
@@ -559,6 +571,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::ChainOfResponsibility:
         return "Chain Of Responsibility";
+
+    case Pattern::Mediator:
+        return "Mediator";
     }
 
     return "No name";
