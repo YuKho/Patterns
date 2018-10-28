@@ -46,7 +46,10 @@ SOURCES += \
     Builder/army.cpp \
     Builder/armybuilder.cpp \
     Builder/director.cpp \
-    ChainOfResponsibility/basehandler.cpp
+    ChainOfResponsibility/basehandler.cpp \
+    Flyweight/unitimagesfactory.cpp \
+    Flyweight/image.cpp \
+    Flyweight/gameunits.cpp
 
 HEADERS += \
     patterntester.h \
@@ -106,4 +109,7 @@ HEADERS += \
     Builder/army.h \
     Builder/armybuilder.h \
     Builder/director.h \
-    ChainOfResponsibility/basehandler.h
+    ChainOfResponsibility/basehandler.h \
+    Flyweight/image.h \
+    Flyweight/unitimagesfactory.h \
+    Flyweight/gameunits.h

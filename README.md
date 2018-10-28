@@ -18,3 +18,4 @@ This project was created to show the simple examples of most common code pattern
 * Bridge
 * Builder
 * Chain Of Responsibility
+* Flyweight

@@ -2,45 +2,34 @@
 
 #include "Strategy/duck.h"
 #include "Strategy/behaviors.h"
-
 #include "Observer/weatherstation.h"
 #include "Observer/weatherobservers.h"
-
 #include "Decorator/beverage.h"
-
 #include "Factory/SimpleFactory/simplepizzastore.h"
 #include "Factory/chicagopizzastore.h"
 #include "Factory/nypizzastore.h"
-
 #include "Singleton/singelton.h"
-
 #include "Command/remotecontrol.h"
 #include "Command/devices.h"
 #include "Command/commands.h"
 #include "Command/macrocommand.h"
-
 #include "Adapter/ducks.h"
 #include "Adapter/turkeys.h"
 #include "Adapter/adapters.h"
-
 #include "Facade/hometheaterfacade.h"
-
 #include "TemplateMethod/beverages.h"
-
 #include "Iterator/waitress.h"
 #include "Iterator/dinermenu.h"
 #include "Iterator/pancakehousemenu.h"
-
 #include "Composite/menucomponent.h"
 #include "Composite/compositewaitress.h"
-
 #include "State/gumballmachine.h"
-
 #include "Bridge/logger.h"
 #include "Builder/director.h"
 #include "Builder/armybuilder.h"
 #include "Builder/army.h"
 #include "ChainOfResponsibility/basehandler.h"
+#include "Flyweight/gameunits.h"
 
 #include <iostream>
 #include <iomanip>
@@ -107,6 +96,10 @@ void PatternTester::testPattern(Pattern pattern)
 
     case Pattern::Builder:
         testBuilder();
+        break;
+
+    case Pattern::Flyweight:
+        testFlyweight();
         break;
 
     case Pattern::ChainOfResponsibility:
@@ -461,6 +454,18 @@ void PatternTester::testBuilder()
     director.printArmy();
 }
 
+void PatternTester::testFlyweight()
+{
+    std::vector<std::shared_ptr<Flyweight::Unit>> units;
+    units.reserve(150);
+
+    for (size_t i = 0; i < 1000; ++i) // only 'Image' for all 'Goblin''s only one time
+        units.push_back(std::make_shared<Flyweight::Goblin>());
+
+    for (size_t i = 0; i < 50; ++i) // only 'Image' for all 'Dragon''s only one time
+        units.push_back(std::make_shared<Flyweight::Dragon>());
+}
+
 void PatternTester::testChainOfResponsibility()
 {
     auto rootHandler = std::make_unique<FirstHandle>();
@@ -548,6 +553,9 @@ std::string PatternTester::patternName(Pattern pattern)
 
     case Pattern::Builder:
         return "Builder";
+
+    case Pattern::Flyweight:
+        return "Flyweight";
 
     case Pattern::ChainOfResponsibility:
         return "Chain Of Responsibility";

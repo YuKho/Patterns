@@ -6,7 +6,7 @@
 class GumballMachine;
 
 enum class Pattern { Strategy, Observer, Decorator, Factory, Singleton, Command, Adapter, Facade,
-                     TemplateMethod, Iterator, Composite, State, Bridge, Builder,
+                     TemplateMethod, Iterator, Composite, State, Bridge, Builder, Flyweight,
                      ChainOfResponsibility };
 
 class PatternTester
@@ -29,6 +29,7 @@ private:
     static void testState();
     static void testBridge();
     static void testBuilder();
+    static void testFlyweight();
     static void testChainOfResponsibility();
 
     static void prinPreInfo(Pattern pattern);
