@@ -7,7 +7,7 @@ class GumballMachine;
 
 enum class Pattern { Strategy, Observer, Decorator, Factory, Singleton, Command, Adapter, Facade,
                      TemplateMethod, Iterator, Composite, State, Bridge, Builder, Flyweight,
-                     // Interpreter , Proxy, // TODO
+                     // Interpreter , Proxy, Memento, Prototype , Visitor // TODO
                      ChainOfResponsibility, Mediator };
 
 class PatternTester
